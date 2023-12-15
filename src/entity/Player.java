@@ -34,7 +34,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX= qp.tileSize*23; // the position of the player ON THE MAP
         worldY= qp.tileSize*23;
-        speed=7;
+        speed=8;
         direction = "down";
     }
     public void getPlayerImage(){
