@@ -17,6 +17,7 @@ public class Player extends Entity{
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
     public Player(GamePanel qp, KeyHandler keyH){
+        super(qp);
         this.qp = qp;
         this.keyH = keyH;
         screenX = qp.screenWidth/2 - (qp.tileSize/2);// to make sure that the player is always at the center(- qp.tileSize/2)

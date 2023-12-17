@@ -12,7 +12,7 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
-        window.setLocationRelativeTo(null);
+        window.setLocationRelativeTo(null);x`
         window.setVisible(true);
         gamePanel.setupGame();
         gamePanel.startGameThread();
