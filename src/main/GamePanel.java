@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.security.Key;
 
+
 public class GamePanel extends JPanel implements Runnable{
     //SCREEN setting
     final int originalTileSize = 16;
@@ -93,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable{
         tileM.draw(g2);
         //object
         for(int i =0;i<obj.length;i++){
-             if(obj[i] != null){
+            if(obj[i] != null){
                 obj[i].draw(g2,this);
             }
         }
