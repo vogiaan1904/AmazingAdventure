@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.security.Key;
 
+
 public class GamePanel extends JPanel implements Runnable{
     //SCREEN setting
     final int originalTileSize = 16;
