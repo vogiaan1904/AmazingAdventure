@@ -12,13 +12,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity{
-    GamePanel qp;
     KeyHandler keyH;
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
-        this.qp = qp;
         this.keyH = keyH;
         screenX = qp.screenWidth/2 - (qp.tileSize/2);// to make sure that the player is always at the center(- qp.tileSize/2)
         screenY = qp.screenHeight/2 - (qp.tileSize/2);
@@ -33,8 +31,8 @@ public class Player extends Entity{
         getPlayerImage();
     }
     public void setDefaultValues(){
-        worldX= qp.tileSize*23; // the position of the player ON THE MAP
-        worldY= qp.tileSize*23;
+        worldX= gp.tileSize*23; // the position of the player ON THE MAP
+        worldY= gp.tileSize*23;
         speed=8;
         direction = "down";
     }
@@ -53,7 +51,7 @@ public class Player extends Entity{
         BufferedImage image = null;
         try{
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/"+imageName+".png")));
-            image = utilityTool.scaledImage(image,qp.tileSize,qp.tileSize);
+            image = utilityTool.scaledImage(image,gp.tileSize,gp.tileSize);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -73,11 +71,11 @@ public class Player extends Entity{
 
             //check tile Collision
             collisionON = false;
-            qp.cChecker.checkTile(this);
+            gp.cChecker.checkTile(this);
             // if collision is false => player can move
 
             //check object Collision
-            int objectIndex = qp.cChecker.checkObject(this, true);
+            int objectIndex = gp.cChecker.checkObject(this, true);
             pickupObject(objectIndex);
             if(!collisionON){
                 switch (direction){
