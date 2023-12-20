@@ -68,7 +68,7 @@ public class TileManager {
         setup(38,"road12",false);
         setup(39,"earth",false);
         setup(40,"wall",true);
-        setup(41,"tree",true);
+        setup(41,"drytree",true);
 
     }
     public void setup(int index, String imageName, boolean collision){
