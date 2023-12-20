@@ -1,4 +1,5 @@
 package main;
+import entity.Entity;
 import entity.Player;
 import main.object.SuperObject;
 import tiles.TileManager;
@@ -32,15 +33,22 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     Thread gameThread;
+
+    //Entity and Object
     public Player player = new Player(this,keyH);
     public SuperObject[] obj = new SuperObject[10];
+    public Entity npc[]  =new Entity[10];
+
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
+
+    //Game State
     public int gameState;
     public final int playState = 1; //telling the program what
     //kind of state we are in.
     //For example: Enter => swing the sword, but in the menu screen, Enter key works as a confirmation key
     public final int pauseState = 2;
+    public final int dialogueState = 3;
 
     public GamePanel() throws IOException {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -51,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void setupGame(){//we want to call set obj be4 the game start
         aSetter.setObject();
+        aSetter.setNPC();
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -76,7 +85,14 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){//update position of the player
         if(gameState == playState){
+            //Player
             player.update();
+            //NPC
+            for(int i=0;i<npc.length;i++){
+                if(npc[i] != null){
+                    npc[i].update();
+                }
+            }
         }
         if(gameState == pauseState){
 
@@ -96,6 +112,12 @@ public class GamePanel extends JPanel implements Runnable{
         for(int i =0;i<obj.length;i++){
             if(obj[i] != null){
                 obj[i].draw(g2,this);
+            }
+        }
+        //npc
+        for(int i =0;i<npc.length;i++){
+            if(npc[i]!= null){
+                npc[i].draw(g2);
             }
         }
         //player
