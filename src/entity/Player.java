@@ -40,14 +40,14 @@ public class Player extends Entity{
         life = maxLife;
     }
     public void getPlayerImage(){
-        up1 = setup("/player/boy_up_1");
-        up2 = setup("/player/boy_up_2");
-        down1 = setup("/player/boy_down_1");
-        down2 = setup("/player/boy_down_2");
-        left1 = setup("/player/boy_left_1");
-        left2 = setup("/player/boy_left_2");
-        right1 = setup("/player/boy_right_1");
-        right2= setup("/player/boy_right_2");
+        up1 = setup("/player/boy_up_1-1");
+        up2 = setup("/player/boy_up_2-1");
+        down1 = setup("/player/boy_down_1-1");
+        down2 = setup("/player/boy_down_2-1");
+        left1 = setup("/player/boy_left_1-1");
+        left2 = setup("/player/boy_left_2-1");
+        right1 = setup("/player/boy_right_1-1");
+        right2= setup("/player/boy_right_2-1");
     }
     public void update(){
         if(keyH.downPressed || keyH.upPressed || keyH.leftPressed || keyH.rightPressed){
