@@ -69,8 +69,14 @@ public class Player extends Entity{
             //check object Collision
             int objectIndex = gp.cChecker.checkObject(this, true);
             pickupObject(objectIndex);
+
+            //check Npc collision
             int npcIndex = gp.cChecker.checkEntity(this,gp.npc);
             interactNPC(npcIndex);
+
+            //check event
+            gp.eHandler.checkEvent();
+            gp.keyH.enterPressed = false;
             if(!collisionON){
                 switch (direction){
                     case "down": worldY+=speed;break;
