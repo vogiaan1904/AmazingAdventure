@@ -18,10 +18,13 @@ public class Entity {
     public int spriteCounter=0;
     public int spriteNum =1;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
+
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionON = false;
     public int actionLockCounter = 0;
     public boolean collision = true;
+    public int maxLife;
+    public int life;
     public BufferedImage setup(String imagePath){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;
