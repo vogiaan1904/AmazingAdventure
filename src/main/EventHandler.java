@@ -53,11 +53,16 @@ public class EventHandler {
         gp.gameState = gameState;
         gp.player.life -= 1;
     }
-    public void healingPool(int gameState){
-        System.out.println("healing...");
-        if(gp.keyH.enterPressed){
-            gp.gameState = gameState;
-            gp.player.life+=1;
+    public void healingPool(int gameState) {
+        try {
+            if (gp.keyH.enterPressed) {
+                gp.gameState = gameState;
+                gp.player.life += 1;
+                System.out.println("healing...");
+            }
+        } catch (Exception e) {
+            // Handle the exception here
+            e.printStackTrace(); // You can replace this with your specific handling logic
         }
     }
 }
