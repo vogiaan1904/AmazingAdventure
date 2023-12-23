@@ -17,13 +17,20 @@ public class NPC_OldMan extends Entity{
         setDialogue();
     }
     public void setDialogue(){
+
+
         dialogues[0] = "Hi, adventurer";
         dialogues[1] = "I'm your father";
         dialogues[2] = "Hey son!!";
         dialogues[3] = "I'm Jeda";
     }
     public void speak(){
+        if(dialogues[dialogueIndex] == null){
+            dialogueIndex = 0 ;
+        }
         gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
     }
 
     public void getImage(){
