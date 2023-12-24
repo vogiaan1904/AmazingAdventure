@@ -19,6 +19,8 @@ public class UI {
     double playTime;
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
     int messageCounter;
+    public String currentDialogue = " ";
+
     public UI(GamePanel gp){
         this.gp = gp;
         Arial_40 = new Font("Arial", Font.PLAIN, 40);
@@ -52,14 +54,7 @@ public class UI {
             drawDialogueScreen();
         }
     }
-    public void drawDialogueScreen(){
-        int x = gp.tileSize*2;
-        int y = gp.tileSize/2;
-        int width = gp.screenWidth - (gp.tileSize*4);
-        int height = gp.tileSize*4;
 
-        drawSubWindow(x,y,width,height);
-    }
     public void drawSubWindow(int x, int y, int width, int height){
         Color c = new Color(0,0,0,200);
         g2.setColor(c);
@@ -103,6 +98,18 @@ public class UI {
         int y;
         y = gp.screenHeight/2;
         g2.drawString(text,x,y);
+    }
+    public void drawDialogueScreen(){
+        int x = gp.tileSize*2;
+        int y = gp.tileSize/2;
+        int width = gp.screenWidth - (gp.tileSize*4);
+        int height = gp.tileSize*4;
+
+        drawSubWindow(x,y,width,height);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+        x+= gp.tileSize;
+        y+= gp.tileSize;
+        g2.drawString(currentDialogue,x,y);
     }
     public int getXforCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();

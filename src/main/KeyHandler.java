@@ -19,32 +19,40 @@ public class  KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        if(code== KeyEvent.VK_W){
-            upPressed = true;
-        }
-        if(code== KeyEvent.VK_S){
-            downPressed = true;
-        }
-        if(code== KeyEvent.VK_A){
-            leftPressed = true;
-        }
-        if(code== KeyEvent.VK_D){
-            rightPressed = true;
-        }
-        if(code== KeyEvent.VK_P){
-            if(gp.gameState == gp.pauseState){
-                gp.gameState = gp.playState;
+        if(gp.gameState == gp.playState ){
+            if(code== KeyEvent.VK_W){
+                upPressed = true;
             }
-            else if(gp.gameState == gp.playState){
+            if(code== KeyEvent.VK_S){
+                downPressed = true;
+            }
+            if(code== KeyEvent.VK_A){
+                leftPressed = true;
+            }
+            if(code== KeyEvent.VK_D){
+                rightPressed = true;
+            }
+            if(code== KeyEvent.VK_P){
                 gp.gameState = gp.pauseState;
             }
-        }
-        if(code==KeyEvent.VK_ENTER){
-            enterPressed = true;
-        }
+            if(code==KeyEvent.VK_ENTER){
+                enterPressed = true;
+            }
 
-        if(code== KeyEvent.VK_T){
-            checkDrawTime = !checkDrawTime;
+            if(code== KeyEvent.VK_T){
+                checkDrawTime = !checkDrawTime;
+            }
+
+        }
+        else if(gp.gameState == gp.pauseState){
+            if(code== KeyEvent.VK_P){
+                gp.gameState = gp.playState;
+            }
+        }
+        else if(gp.gameState == gp.dialogueState){
+            if(code== KeyEvent.VK_ENTER){
+                gp.gameState = gp.playState;
+            }
         }
     }
 

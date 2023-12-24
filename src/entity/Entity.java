@@ -25,6 +25,9 @@ public class Entity {
     public boolean collision = true;
     public int maxLife;
     public int life;
+
+    public String dialogues[] = new String[20];
+    public int dialogueIndex = 0;
     public BufferedImage setup(String imagePath){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;
@@ -37,6 +40,7 @@ public class Entity {
         return image;
     }
     public void setAction(){}
+    public void speak(){};
     public void update(){
         setAction();
         collisionON = false;
