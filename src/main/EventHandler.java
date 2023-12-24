@@ -25,6 +25,7 @@ public class EventHandler {
         }
         if(hit(23,12,"any")){
             healingPool(gp.playState);
+            gp.keyH.enterPressed = false;
         }
     }
     public boolean hit(int eventCol, int eventRow, String reqDirection){
@@ -57,7 +58,7 @@ public class EventHandler {
         System.out.println("healing...");
         if(gp.keyH.enterPressed){
             gp.gameState = gameState;
-            gp.player.life+=1;
+            gp.player.life += 1;
         }
     }
 }
