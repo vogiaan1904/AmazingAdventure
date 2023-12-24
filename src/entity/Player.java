@@ -76,7 +76,7 @@ public class Player extends Entity{
 
             //check event
             gp.eHandler.checkEvent();
-            gp.keyH.enterPressed = false;
+
             if(!collisionON){
                 switch (direction){
                     case "down": worldY+=speed;break;
