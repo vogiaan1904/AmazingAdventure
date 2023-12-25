@@ -20,30 +20,12 @@ public class NPC_OldMan extends Entity{
 
 
         dialogues[0] = "Hi, adventurer";
-        dialogues[1] = "I'm your father";
+        dialogues[1] = "I'm the landlord!! \n begging me for mercy, bastard";
         dialogues[2] = "Hey son!!";
         dialogues[3] = "I'm Jeda";
     }
     public void speak(){
-        if(dialogues[dialogueIndex] == null){
-            dialogueIndex = 0 ;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
-        switch (gp.player.direction){
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            case "left":
-                direction = "right";
-                break;
-            case "right":
-                direction = "left";
-                break;
-        }
+        super.speak();
 
     }
 
