@@ -82,7 +82,6 @@ public class EventHandler {
         }
     }
     public void healingPool(int col, int row,int gameState){
-
         if(hit(23,12,"any")){
             if(gp.player.life>=1 && gp.player.life <6){
                 gp.player.life =6 ;
