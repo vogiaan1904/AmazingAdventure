@@ -8,7 +8,7 @@ public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][];
     int previousEventX, previousEventY;
-    boolean canTouchEven = true;
+    boolean canTouchEvent = true;
     public EventHandler(GamePanel gp){
         this.gp = gp;
 
@@ -38,9 +38,9 @@ public class EventHandler {
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance  = Math.max(xDistance,yDistance);
         if(distance > gp.tileSize){
-            canTouchEven = true;
+            canTouchEvent = true;
         }
-        if(canTouchEven == true){
+        if(canTouchEvent == true){
             if(hit(24,16,"right")){
                 //event happens
                 damagePit(24,16,gp.playState);
@@ -60,7 +60,7 @@ public class EventHandler {
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if(gp.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].evenDone){
+        if(gp.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone){
             if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
                 hit = true;
                 previousEventX = gp.player.worldX;
@@ -77,9 +77,9 @@ public class EventHandler {
     }
     public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
-        if(gp.player.life>=4){
-        gp.player.life -= 1;
-        }else gp.player.life = 4;
+        if(gp.player.life>=5){
+            gp.player.life -= 1;
+        }
     }
     public void healingPool(int col, int row,int gameState){
 
@@ -88,8 +88,8 @@ public class EventHandler {
                 gp.player.life =6 ;
                 System.out.println("Healing!!!");
             }else gp.player.life = 6;
-        eventRect[col][row].evenDone = true;
-        canTouchEven = false;
+        eventRect[col][row].eventDone = true;
+        canTouchEvent = false;
         }
     }
 }
