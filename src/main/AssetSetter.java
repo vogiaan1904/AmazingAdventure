@@ -2,6 +2,7 @@ package main;
 
 import entity.NPC_OldMan;
 import main.object.*;
+import monster.Monster_Orc;
 
 public class AssetSetter {
     GamePanel gp;
@@ -35,5 +36,10 @@ public class AssetSetter {
         gp.npc[2] = new NPC_OldMan(gp);
         gp.npc[2].worldX = gp.tileSize*20;
         gp.npc[2].worldY = gp.tileSize*21;
+    }
+    public void setMonster(){
+        gp.monster[0] = new Monster_Orc(gp);
+        gp.monster[0].worldX = gp.tileSize*24;
+        gp.monster[0].worldY = gp.tileSize*24;
     }
 }

@@ -1,9 +1,6 @@
 package main;
-
 import com.sun.source.tree.BreakTree;
-
 import java.awt.*;
-
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][];
@@ -47,7 +44,6 @@ public class EventHandler {
             }
             if(hit(23,12,"any")){
                 healingPool(23,12,gp.playState);
-                gp.keyH.enterPressed = false;
             }
         }
     }

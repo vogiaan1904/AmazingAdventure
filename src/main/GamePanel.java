@@ -42,10 +42,10 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this,keyH);
     public Entity obj[] = new Entity[10];
     public Entity npc[]  =new Entity[10];
+    public Entity monster[]  =new Entity[10];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
     ArrayList<Entity> entityList = new ArrayList<>();
-
 
 
     //Game State
@@ -67,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame(){//we want to call set obj be4 the game start
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         gameState = titleState;
     }
     public void startGameThread(){
@@ -99,6 +100,11 @@ public class GamePanel extends JPanel implements Runnable{
             for(int i=0;i<npc.length;i++){
                 if(npc[i] != null){
                     npc[i].update();
+                }
+            }
+            for(int i=0;i<monster.length;i++){
+                if(monster[i] != null){
+                    monster[i].update();
                 }
             }
         }
@@ -134,6 +140,11 @@ public class GamePanel extends JPanel implements Runnable{
                     entityList.add(obj[i]);
                 }
             }
+            for(int i=0;i<monster.length;i++) {
+                if (monster[i] != null) {
+                    entityList.add(monster[i]);
+                }
+            }
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
@@ -141,6 +152,7 @@ public class GamePanel extends JPanel implements Runnable{
                     return result;
                 }
             });
+
 
             //Draw entities
             for(int i=0;i<entityList.size();i++){
@@ -153,6 +165,7 @@ public class GamePanel extends JPanel implements Runnable{
             //UI
             ui.draw(g2);
         }
+
         //Debug
         if(keyH.checkDrawTime){
             drawEnd = System.nanoTime();

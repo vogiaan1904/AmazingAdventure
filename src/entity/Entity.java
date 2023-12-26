@@ -16,12 +16,15 @@ public class Entity {
     public BufferedImage up1,up2,down1,down2,right1,right2,left1,left2;
     public String direction = "down";
     public int spriteCounter=0;
+    public int standCounter=0;
     public int spriteNum =1;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
 
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionON = false;
     public int actionLockCounter = 0;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
     public int maxLife;
     public int life;
 
@@ -31,6 +34,7 @@ public class Entity {
     public BufferedImage image,image2,image3;
     public String name;
     public boolean collision = false;
+    public int type; // 0 = player, 1 = npc, 2 = monster
     public BufferedImage setup(String imagePath){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;
@@ -68,8 +72,16 @@ public class Entity {
         setAction();
         collisionON = false;
         gp.cChecker.checkObject(this,false);
-        gp.cChecker.checkPlayer(this, false);
+        boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
+        gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
         gp.cChecker.checkTile(this);
+        if(this.type == 2 && contactPlayer){
+            if(!gp.player.invincible){
+                gp.player.life -= 1;
+                gp.player.invincible = true;
+            }
+        }
         if(!collisionON){
             switch (direction){
                 case "down": worldY+=speed;break;

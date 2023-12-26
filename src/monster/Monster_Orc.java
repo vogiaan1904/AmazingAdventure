@@ -1,0 +1,57 @@
+package monster;
+
+import entity.Entity;
+import main.GamePanel;
+
+import java.awt.*;
+import java.util.Random;
+
+public class Monster_Orc extends Entity {
+    public Monster_Orc(GamePanel gp) {
+        super(gp);
+        type = 2;
+        name = "Orc";
+        speed = 5;
+        maxLife = 4;
+        life = maxLife;
+        solidArea = new Rectangle();
+        solidArea.x = 14;
+        solidArea.y = 28;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 20;
+        solidArea.height = 20;
+        getImage();
+    }
+    public void getImage(){
+        up1 = setup("/monster/orc_attack_up_1");
+        up2 = setup("/monster/orc_attack_up_2");
+        down1 = setup("/monster/orc_attack_down_1");
+        down2 = setup("/monster/orc_attack_down_2");
+        left1 = setup("/monster/orc_attack_left_1");
+        left2 = setup("/monster/orc_attack_left_2");
+        right1 = setup("/monster/orc_attack_right_1");
+        right2= setup("/monster/orc_attack_right_2");
+    }
+    public void setAction(){
+        actionLockCounter++;
+        if(actionLockCounter == 120){ // lock for 120 frames / 2s
+            //simplest AI
+            Random random = new Random();
+            int i = random.nextInt(100)+1;
+            if(i<=25){
+                direction = "up";
+            }
+            if(i>25 && i<=50){
+                direction = "down";
+            }
+            if(i>50 && i<=75){
+                direction = "left";
+            }
+            if(i>75){
+                direction = "right";
+            }
+            actionLockCounter = 0;
+        }
+    }
+}
