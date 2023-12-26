@@ -115,67 +115,45 @@ public class GamePanel extends JPanel implements Runnable{
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-<<<<<<< HEAD
-        //tile
-        tileM.draw(g2);
-        //object
-        entityList.add(player);
-        for(int i=0;i<npc.length;i++){
-            if(npc[i] != null){
-                entityList.add(npc[i]);
-            }
-        }
-        for(int i=0;i<obj.length;i++){
-            if(obj[i]!=null){
-                entityList.add(obj[i]);
-=======
+
         //title screen
         if(gameState == titleState){
             ui.draw(g2);
-        }else {
-
-            //tile
+        }
+        else {
             tileM.draw(g2);
-            //object
-            for(int i =0;i<obj.length;i++){
-                if(obj[i] != null){
-                    obj[i].draw(g2,this);
+            //Add entities to the list
+            entityList.add(player);
+            for(int i=0;i<npc.length;i++){
+                if(npc[i] != null){
+                    entityList.add(npc[i]);
                 }
             }
-            //npc
-            for(int i =0;i<npc.length;i++){
-                if(npc[i]!= null){
-                    npc[i].draw(g2);
+            for(int i=0;i<obj.length;i++) {
+                if (obj[i] != null) {
+                    entityList.add(obj[i]);
                 }
->>>>>>> 8dc293cb88e4042abf5f833c431032570370016f
             }
-            //player
-            player.draw(g2);
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    int result = Integer.compare(e1.worldY, e2.worldY);
+                    return result;
+                }
+            });
+
+            //Draw entities
+            for(int i=0;i<entityList.size();i++){
+                entityList.get(i).draw(g2);
+            }
+            //Empty entities list
+            for(int i=0;i<entityList.size();i++){
+                entityList.remove(i);
+            }
             //UI
             ui.draw(g2);
         }
-<<<<<<< HEAD
-        //Sort
-        Collections.sort(entityList, new Comparator<Entity>() {
-            @Override
-            public int compare(Entity e1, Entity e2) {
-                int result = Integer.compare(e1.worldY,e2.worldY);
-                return result;
-            }
-        });
-        //Draw entities
-        for(int i=0;i<entityList.size();i++){
-            entityList.get(i).draw(g2);
-        }
-        //Empty entities list
-        for(int i=0;i<entityList.size();i++){
-            entityList.remove(i);
-        }
-        //UI
-        ui.draw(g2);
-=======
-
->>>>>>> 8dc293cb88e4042abf5f833c431032570370016f
+        //Debug
         if(keyH.checkDrawTime){
             drawEnd = System.nanoTime();
             g2.setColor(Color.white);

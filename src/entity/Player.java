@@ -32,7 +32,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX= gp.tileSize*23; // the position of the player ON THE MAP
         worldY= gp.tileSize*23;
-        speed=4;
+        speed=5;
         direction = "down";
 
         //Player Status
