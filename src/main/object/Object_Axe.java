@@ -1,21 +1,12 @@
 package main.object;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
-public class Object_Axe extends SuperObject{
-    GamePanel gp;
+public class Object_Axe extends Entity {
     public Object_Axe(GamePanel gp) {
-        this.gp = gp;
+        super(gp);
         name = "Axe";
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/axe.png"));
-            utilityTool.scaledImage(image,gp.tileSize,gp.tileSize);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        down1 = setup("/objects/axe");
     }
 }

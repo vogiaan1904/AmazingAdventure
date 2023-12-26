@@ -7,6 +7,8 @@ import java.awt.*;
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][];
+    int previousEventX, previousEventY;
+    boolean canTouchEven = true;
     public EventHandler(GamePanel gp){
         this.gp = gp;
 
@@ -30,13 +32,23 @@ public class EventHandler {
         }
     }
     public void checkEvent(){
-        if(hit(24,16,"right")){
-            //event happens
-            damagePit(gp.playState);
+
+        //check if the Player character is more 1 tile away the last event
+        int xDistance = Math.abs(gp.player.worldX - previousEventX);
+        int yDistance = Math.abs(gp.player.worldY - previousEventY);
+        int distance  = Math.max(xDistance,yDistance);
+        if(distance > gp.tileSize){
+            canTouchEven = true;
         }
-        if(hit(23,12,"any")){
-            healingPool(gp.playState);
-            gp.keyH.enterPressed = false;
+        if(canTouchEven == true){
+            if(hit(24,16,"right")){
+                //event happens
+                damagePit(24,16,gp.playState);
+            }
+            if(hit(23,12,"any")){
+                healingPool(23,12,gp.playState);
+                gp.keyH.enterPressed = false;
+            }
         }
     }
     public boolean hit(int col, int row, String reqDirection){
@@ -48,9 +60,11 @@ public class EventHandler {
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if(gp.player.solidArea.intersects(eventRect[col][row])){
+        if(gp.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].evenDone){
             if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
                 hit = true;
+                previousEventX = gp.player.worldX;
+                previousEventY = gp.player.worldY;
             }
         }
 
@@ -61,11 +75,13 @@ public class EventHandler {
 
         return hit;
     }
-    public void damagePit(int gameState){
+    public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
         gp.player.life -= 1;
+        eventRect[col][row].evenDone = true;
+        canTouchEven = false;
     }
-    public void healingPool(int gameState){
+    public void healingPool(int col, int row, int gameState){
         System.out.println("healing...");
         if(gp.keyH.enterPressed) {
             gp.gameState = gameState;
