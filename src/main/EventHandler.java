@@ -63,13 +63,17 @@ public class EventHandler {
     }
     public void damagePit(int gameState){
         gp.gameState = gameState;
+        if(gp.player.life>=4){
         gp.player.life -= 1;
+        }else gp.player.life = 4;
     }
     public void healingPool(int gameState){
-        System.out.println("healing...");
-        if(gp.keyH.enterPressed) {
-            gp.gameState = gameState;
-            gp.player.life += 1;
+
+        if(hit(23,12,"any")){
+            if(gp.player.life>=1 && gp.player.life <6){
+                gp.player.life =6 ;
+                System.out.println("Healing!!!");
+            }else gp.player.life = 6;
         }
     }
 }
