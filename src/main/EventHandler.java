@@ -36,20 +36,26 @@ public class EventHandler {
         int distance  = Math.max(xDistance,yDistance);
         if(distance > gp.tileSize){
             canTouchEvent = true;
+            resetEventDone();
         }
         if(canTouchEvent == true){
             if(hit(24,16,"right")){
                 //event happens
                 damagePit(24,16,gp.playState);
             }
+            if(hit(23,11,"any")){
+                healingPool(23,11,gp.playState);
+            }
             if(hit(23,12,"any")){
                 healingPool(23,12,gp.playState);
+            }
+            if(hit(23,13,"any")){
+                healingPool(23,13,gp.playState);
             }
         }
     }
     public boolean hit(int col, int row, String reqDirection){
         boolean hit = false;
-
         //update the position of player's rectangle
         gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
@@ -73,18 +79,27 @@ public class EventHandler {
     }
     public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
-        if(gp.player.life>=5){
+        if(gp.player.life>=2){
             gp.player.life -= 1;
         }
+        eventRect[col][row].eventDone = true;
     }
     public void healingPool(int col, int row,int gameState){
-        if(hit(23,12,"any")){
+            gp.gameState = gameState;
             if(gp.player.life>=1 && gp.player.life <6){
                 gp.player.life =6 ;
                 System.out.println("Healing!!!");
             }else gp.player.life = 6;
+
         eventRect[col][row].eventDone = true;
         canTouchEvent = false;
+
+    }
+    private void resetEventDone() {
+        for (int col = 0; col < gp.maxWorldCol; col++) {
+            for (int row = 0; row < gp.maxWorldRow; row++) {
+                eventRect[col][row].eventDone = false;
+            }
         }
     }
 }
