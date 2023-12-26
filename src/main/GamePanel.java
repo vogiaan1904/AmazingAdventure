@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     //Game State
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1; //telling the program what
     //kind of state we are in.
     //For example: Enter => swing the sword, but in the menu screen, Enter key works as a confirmation key
@@ -66,11 +67,12 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame(){//we want to call set obj be4 the game start
         aSetter.setObject();
         aSetter.setNPC();
+        gameState = titleState;
     }
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
-        gameState = playState;
+        gameState = titleState;
     }
     @Override
     public void run(){
@@ -110,8 +112,10 @@ public class GamePanel extends JPanel implements Runnable{
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();
         }
+
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+<<<<<<< HEAD
         //tile
         tileM.draw(g2);
         //object
@@ -124,8 +128,33 @@ public class GamePanel extends JPanel implements Runnable{
         for(int i=0;i<obj.length;i++){
             if(obj[i]!=null){
                 entityList.add(obj[i]);
+=======
+        //title screen
+        if(gameState == titleState){
+            ui.draw(g2);
+        }else {
+
+            //tile
+            tileM.draw(g2);
+            //object
+            for(int i =0;i<obj.length;i++){
+                if(obj[i] != null){
+                    obj[i].draw(g2,this);
+                }
             }
+            //npc
+            for(int i =0;i<npc.length;i++){
+                if(npc[i]!= null){
+                    npc[i].draw(g2);
+                }
+>>>>>>> 8dc293cb88e4042abf5f833c431032570370016f
+            }
+            //player
+            player.draw(g2);
+            //UI
+            ui.draw(g2);
         }
+<<<<<<< HEAD
         //Sort
         Collections.sort(entityList, new Comparator<Entity>() {
             @Override
@@ -144,6 +173,9 @@ public class GamePanel extends JPanel implements Runnable{
         }
         //UI
         ui.draw(g2);
+=======
+
+>>>>>>> 8dc293cb88e4042abf5f833c431032570370016f
         if(keyH.checkDrawTime){
             drawEnd = System.nanoTime();
             g2.setColor(Color.white);
