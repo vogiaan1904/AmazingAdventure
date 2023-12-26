@@ -7,8 +7,10 @@ import java.awt.*;
 import java.util.Random;
 
 public class Monster_Orc extends Entity {
+    GamePanel gp;
     public Monster_Orc(GamePanel gp) {
         super(gp);
+        this.gp = gp;
         type = 2;
         name = "Orc";
         speed = 5;
@@ -24,14 +26,14 @@ public class Monster_Orc extends Entity {
         getImage();
     }
     public void getImage(){
-        up1 = setup("/monster/orc_attack_up_1");
-        up2 = setup("/monster/orc_attack_up_2");
-        down1 = setup("/monster/orc_attack_down_1");
-        down2 = setup("/monster/orc_attack_down_2");
-        left1 = setup("/monster/orc_attack_left_1");
-        left2 = setup("/monster/orc_attack_left_2");
-        right1 = setup("/monster/orc_attack_right_1");
-        right2= setup("/monster/orc_attack_right_2");
+        up1 = setup("/monster/orc_attack_up_1",gp.tileSize,gp.tileSize*2);
+        up2 = setup("/monster/orc_attack_up_2",gp.tileSize,gp.tileSize*2);
+        down1 = setup("/monster/orc_attack_down_1",gp.tileSize,gp.tileSize*2);
+        down2 = setup("/monster/orc_attack_down_2",gp.tileSize,gp.tileSize*2);
+        left1 = setup("/monster/orc_attack_left_1",gp.tileSize*2,gp.tileSize);
+        left2 = setup("/monster/orc_attack_left_2",gp.tileSize*2,gp.tileSize);
+        right1 = setup("/monster/orc_attack_right_1",gp.tileSize*2,gp.tileSize);
+        right2= setup("/monster/orc_attack_right_2",gp.tileSize*2,gp.tileSize);
     }
     public void setAction(){
         actionLockCounter++;
@@ -53,5 +55,9 @@ public class Monster_Orc extends Entity {
             }
             actionLockCounter = 0;
         }
+    }
+    public void damageReaction(){
+        actionLockCounter=0;
+        direction = gp.player.direction;
     }
 }

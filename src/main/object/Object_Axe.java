@@ -7,6 +7,6 @@ public class Object_Axe extends Entity {
     public Object_Axe(GamePanel gp) {
         super(gp);
         name = "Axe";
-        down1 = setup("/objects/axe");
+        down1 = setup("/objects/axe",gp.tileSize,gp.tileSize);
     }
 }
