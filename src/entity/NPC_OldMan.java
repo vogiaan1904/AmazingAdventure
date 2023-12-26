@@ -17,8 +17,6 @@ public class NPC_OldMan extends Entity{
         setDialogue();
     }
     public void setDialogue(){
-
-
         dialogues[0] = "Hi, adventurer";
         dialogues[1] = "I'm the landlord!! \n begging me for mercy, bastard";
         dialogues[2] = "Hey son!!";
@@ -43,6 +41,7 @@ public class NPC_OldMan extends Entity{
     public void setAction(){
         actionLockCounter++;
         if(actionLockCounter == 120){ // lock for 120 frames / 2s
+            //simplest AI
             Random random = new Random();
             int i = random.nextInt(100)+1;
             if(i<=25){
@@ -57,7 +56,6 @@ public class NPC_OldMan extends Entity{
             if(i>75){
                 direction = "right";
             }
-            //simplest AI ever :)))
             actionLockCounter = 0;
         }
     }
