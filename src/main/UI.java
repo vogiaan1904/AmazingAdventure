@@ -57,6 +57,9 @@ public class UI {
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
         }
+        if(gp.gameState == gp.characterState){
+            drawInventory();
+        }
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
@@ -152,7 +155,13 @@ public class UI {
             g2.drawString(line,x,y);
             y+=40;
         }
-
+    }
+    public void drawInventory(){
+        int frameX = gp.tileSize*9;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize*6;
+        int frameHeight = gp.tileSize*5;
+        drawSubWindow(frameX,frameY,frameWidth,frameHeight);
     }
     public int getXforCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();

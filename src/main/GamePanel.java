@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
     //For example: Enter => swing the sword, but in the menu screen, Enter key works as a confirmation key
     public final int pauseState = 2;
     public final int dialogueState = 3;
+    public final int characterState = 4;
 
     public GamePanel() throws IOException {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
