@@ -2,19 +2,25 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.object.Object_Axe;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity{
     KeyHandler keyH;
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int inventorySize = 20;
+    public Entity currentWeapon;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
         this.keyH = keyH;
@@ -32,6 +38,7 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
     public void setDefaultValues(){
         worldX= gp.tileSize*23; // the position of the player ON THE MAP
@@ -42,6 +49,10 @@ public class Player extends Entity{
         //Player Status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+        currentWeapon = new Object_Axe(gp);
+    }
+    public void setItems(){
+        inventory.add(currentWeapon);
     }
     public void getPlayerAttackImage(){
         attackUp1 = setup("/player/att_up_1",gp.tileSize, gp.tileSize*2);
@@ -267,6 +278,5 @@ public class Player extends Entity{
         g2.drawImage(image,tempScreenX,tempScreenY,null);//draw the player
         //reset alpha
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
-
     }
 }

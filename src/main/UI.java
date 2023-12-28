@@ -20,6 +20,8 @@ public class UI {
     int messageCounter;
     public String currentDialogue = " ";
     public int commandNum=0;
+    public int slotCol = 0;
+    public int slotRow = 0;
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -109,7 +111,6 @@ public class UI {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
-
         //Draw blank heart
         while(i< gp.player.maxLife/2){
             g2.drawImage(heart_blank,x,y,null);
@@ -121,11 +122,12 @@ public class UI {
         x = gp.tileSize/2;
         y = gp.tileSize/2;
         i = 0;
+
         //Draw current life
         while (i<gp.player.life){
             g2.drawImage(heart_half,x,y,null);
             i++;
-            if(i<gp.player.life){ // increase half heart in each loop
+            if(i<gp.player.life){// increase half heart in each loop
                 g2.drawImage(heart_full,x,y,null);
             }
             i++;
@@ -157,11 +159,41 @@ public class UI {
         }
     }
     public void drawInventory(){
+        //Frame
         int frameX = gp.tileSize*9;
         int frameY = gp.tileSize;
         int frameWidth = gp.tileSize*6;
         int frameHeight = gp.tileSize*5;
         drawSubWindow(frameX,frameY,frameWidth,frameHeight);
+
+        //Slot
+        final int slotXstart = frameX+20;
+        final int slotYstart = frameY+20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+        int slotSize = gp.tileSize+3;
+
+        //Draw player's items
+        for (int i =0;i<gp.player.inventory.size();i++){
+            g2.drawImage(gp.player.inventory.get(i).down1,slotX,slotY,null);
+
+            slotX+= slotSize;
+            if(i==4 || i==8 || i==14){
+                slotY += slotSize;
+                slotX =slotXstart ;
+            }
+        }
+
+        //Cursor
+        int cursorX = slotXstart + slotSize * slotCol;
+        int cursorY = slotYstart + slotSize *slotRow;
+        int cursorWidth = gp.tileSize;
+        int cursorHeight = gp.tileSize;
+
+        //Draw cursor
+        g2.setColor(Color.white);
+        g2.setStroke(new BasicStroke(3 ));
+        g2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
     }
     public int getXforCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
