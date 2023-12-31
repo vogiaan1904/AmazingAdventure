@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 
+import java.sql.SQLOutput;
+
 public class CollisionChecker {
     GamePanel qp;
     public CollisionChecker(GamePanel qp){

@@ -91,6 +91,11 @@ public class Player extends Entity{
                 direction = "right";
             }
 
+            int entityRow = (int)this.worldY/gp.tileSize;
+            int entityCol = (int)this.worldX/gp.tileSize;
+
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
+
             //check tile Collision
             collisionON = false;
             gp.cChecker.checkTile(this);
@@ -116,6 +121,7 @@ public class Player extends Entity{
                     case "left": worldX-=speed;break;
                     case "right": worldX+=speed;break;
                 }
+
             }
 
             gp.keyH.enterPressed = false;
