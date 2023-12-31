@@ -20,6 +20,7 @@ public class  KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         //title screen
+        
         if (gp.gameState == gp.titleState) {
             if(code== KeyEvent.VK_W){
                 gp.ui.commandNum --;

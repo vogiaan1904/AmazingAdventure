@@ -14,7 +14,7 @@ public class Monster_Orc extends Entity {
         type = 2;
         name = "Orc";
         speed = 5;
-        maxLife = 4;
+        maxLife = 20;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 14;
