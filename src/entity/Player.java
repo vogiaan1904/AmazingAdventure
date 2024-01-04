@@ -19,8 +19,9 @@ public class Player extends Entity{
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
     public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int inventorySize = 20;
+    public final int maxInventorySize = 20;
     public Entity currentWeapon;
+    public Entity currentShield;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
         this.keyH = keyH;
@@ -108,9 +109,14 @@ public class Player extends Entity{
             //check NPC collision
             int npcIndex = gp.cChecker.checkEntity(this,gp.npc);
             interactNPC(npcIndex);
+
             //check Monster collision
             int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
             contactMonster(monsterIndex);
+
+            //check interactive tile collision
+            int iTile = gp.cChecker.checkEntity(this, gp.iTile);
+
             //check event
             gp.eHandler.checkEvent();
             // if collision is false, player can move
@@ -182,6 +188,9 @@ public class Player extends Entity{
             int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
             damageMonster(monsterIndex);
 
+            int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
+            damageInteractiveTile(iTileIndex);
+
             //after checking collision, restore the original data
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -195,7 +204,16 @@ public class Player extends Entity{
         }
     }
     public void pickupObject(int i){
+        String text;
         if(i!=999){
+            if(inventory.size()  != maxInventorySize){
+                inventory.add(gp.obj[i]);
+                text = "Got a " + gp.obj[i].name + "!";
+            }
+            else {
+                text = "Your inventory is full!";
+            }
+            gp.obj[i] = null;
         }
     }
     public void interactNPC(int i){
@@ -229,6 +247,11 @@ public class Player extends Entity{
                     gp.monster[i].dying = true;
                 }
             }
+        }
+    }
+    public void damageInteractiveTile(int i){
+        if(i!=999 && gp.iTile[i].destructable){
+            gp.iTile[i] = gp.iTile[i].getDestroyedForm();
         }
     }
     public void draw(Graphics2D g2){ // draw the movement of player

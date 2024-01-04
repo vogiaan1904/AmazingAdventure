@@ -3,6 +3,8 @@ package main;
 import entity.NPC_OldMan;
 import main.object.*;
 import monster.Monster_Orc;
+import tile_interactive.IT_dryTree;
+import tile_interactive.InteractiveTile;
 
 public class AssetSetter {
     GamePanel gp;
@@ -58,5 +60,14 @@ public class AssetSetter {
         gp.monster[0] = new Monster_Orc(gp);
         gp.monster[0].worldX = gp.tileSize*24;
         gp.monster[0].worldY = gp.tileSize*24;
+    }
+    public void setInteractiveTile(){
+        int i =0;
+        gp.iTile[i] = new IT_dryTree(gp,12,27);i++;
+        gp.iTile[i] = new IT_dryTree(gp,12,28);i++;
+        gp.iTile[i] = new IT_dryTree(gp,12,29);i++;
+        gp.iTile[i] = new IT_dryTree(gp,12,30);i++;
+        gp.iTile[i] = new IT_dryTree(gp,12,31);i++;
+        gp.iTile[i] = new IT_dryTree(gp,12,32);i++;
     }
 }

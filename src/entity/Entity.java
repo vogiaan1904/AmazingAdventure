@@ -42,6 +42,12 @@ public class Entity {
     public String name;
     public boolean collision = false;
     public int type; // 0 = player, 1 = npc, 2 = monster
+    public final int type_player = 1;
+    public final int type_npc = 2;
+    public final int type_monster = 3;
+    public final int type_axe = 4;
+    public final int type_shield = 5;
+    public final int type_consumable = 6;
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;

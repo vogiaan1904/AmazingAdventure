@@ -1,6 +1,7 @@
 package main;
 import entity.Entity;
 import entity.Player;
+import tile_interactive.InteractiveTile;
 import tiles.TileManager;
 
 import javax.swing.JPanel;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity monster[]  =new Entity[10];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
+    public InteractiveTile iTile[] = new InteractiveTile[50];
     ArrayList<Entity> entityList = new ArrayList<>();
 
 
@@ -68,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
+        aSetter.setInteractiveTile();
         gameState = titleState;
     }
     public void startGameThread(){
@@ -92,7 +95,8 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
-    public void update(){//update position of the player
+    public void update(){
+        //update position of the player
         if(gameState == playState){
             //Player
             player.update();
@@ -110,6 +114,11 @@ public class GamePanel extends JPanel implements Runnable{
                     if(!monster[i].alive){
                         monster[i] = null;
                     }
+                }
+            }
+            for(int i = 0;i<iTile.length;i++){
+                if(iTile[i] != null){
+                    iTile[i].update();
                 }
             }
         }
@@ -132,7 +141,15 @@ public class GamePanel extends JPanel implements Runnable{
             ui.draw(g2);
         }
         else {
+            //Tile
             tileM.draw(g2);
+
+            //Interactive Tile
+            for(int i = 0;i < iTile.length;i++){
+                if(iTile[i]!= null){
+                    iTile[i].draw(g2);
+                }
+            }
             //Add entities to the list
             entityList.add(player);
             for(int i=0;i<npc.length;i++){
@@ -150,6 +167,7 @@ public class GamePanel extends JPanel implements Runnable{
                     entityList.add(monster[i]);
                 }
             }
+
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
