@@ -11,29 +11,34 @@ public class AssetSetter {
     }
 
     public void setObject(){
-        gp.obj[0] = new Object_Door(gp);
-        gp.obj[0].worldX = gp.tileSize*8;
-        gp.obj[0].worldY = gp.tileSize*27;
+        int i = 0;
+        gp.obj[i] = new Object_Door(gp);
+        gp.obj[i].worldX = gp.tileSize*8;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;
+        gp.obj[i] = new Object_Key(gp);
+        gp.obj[i].worldX = gp.tileSize*21;
+        gp.obj[i].worldY = gp.tileSize*18;
+        i++;
+        gp.obj[i] = new Object_Axe(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*38;
+        i++;
+        gp.obj[i] = new Object_Door(gp);
+        gp.obj[i].worldX = gp.tileSize*38;
+        gp.obj[i].worldY = gp.tileSize*12;
+        i++;
 
-        gp.obj[1] = new Object_Key(gp);
-        gp.obj[1].worldX = gp.tileSize*21;
-        gp.obj[1].worldY = gp.tileSize*18;
+        gp.obj[i] = new Object_Chest(gp);
+        gp.obj[i].worldX = gp.tileSize*35;
+        gp.obj[i].worldY = gp.tileSize*8;
+        i++;
 
-        gp.obj[2] = new Object_Axe(gp);
-        gp.obj[2].worldX = gp.tileSize*23;
-        gp.obj[2].worldY = gp.tileSize*38;
+        gp.obj[i] = new Object_Door(gp);
+        gp.obj[i].worldX = gp.tileSize*9;
+        gp.obj[i].worldY = gp.tileSize*11;
+        i++;
 
-        gp.obj[3] = new Object_Door(gp);
-        gp.obj[3].worldX = gp.tileSize*38;
-        gp.obj[3].worldY = gp.tileSize*12;
-
-        gp.obj[4] = new Object_Chest(gp);
-        gp.obj[4].worldX = gp.tileSize*35;
-        gp.obj[4].worldY = gp.tileSize*8;
-
-        gp.obj[5] = new Object_Door(gp);
-        gp.obj[5].worldX = gp.tileSize*9;
-        gp.obj[5].worldY = gp.tileSize*11;
     }
 
     public void setNPC(){

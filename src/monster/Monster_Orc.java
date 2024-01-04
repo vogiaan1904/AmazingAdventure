@@ -23,8 +23,12 @@ public class Monster_Orc extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 20;
         solidArea.height = 20;
+        attackArea.width=36;
+        attackArea.height=36;
         getImage();
     }
+
+
     public void getImage(){
         up1 = setup("/monster/orc_attack_up_1",gp.tileSize,gp.tileSize*2);
         up2 = setup("/monster/orc_attack_up_2",gp.tileSize,gp.tileSize*2);
@@ -35,6 +39,7 @@ public class Monster_Orc extends Entity {
         right1 = setup("/monster/orc_attack_right_1",gp.tileSize*2,gp.tileSize);
         right2= setup("/monster/orc_attack_right_2",gp.tileSize*2,gp.tileSize);
     }
+
     public void setAction(){
         actionLockCounter++;
         if(actionLockCounter == 120){ // lock for 120 frames / 2s

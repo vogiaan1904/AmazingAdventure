@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
-
 public class GamePanel extends JPanel implements Runnable{
     //SCREEN setting
     final int originalTileSize = 16;
@@ -158,7 +157,6 @@ public class GamePanel extends JPanel implements Runnable{
                     return result;
                 }
             });
-
 
             //Draw entities
             for(int i=0;i<entityList.size();i++){

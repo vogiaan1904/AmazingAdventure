@@ -159,6 +159,7 @@ public class Player extends Entity{
         }
         if(spriteCounter>5 && spriteCounter <=25){
             spriteNum = 2;
+
             //save the current worldX, worldY, solidArea
             int currentWorldX = worldX;
             int currentWorldY = worldY;
@@ -180,6 +181,7 @@ public class Player extends Entity{
             //check monster collision with the updated worldX, worldY
             int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
             damageMonster(monsterIndex);
+
             //after checking collision, restore the original data
             worldX = currentWorldX;
             worldY = currentWorldY;
