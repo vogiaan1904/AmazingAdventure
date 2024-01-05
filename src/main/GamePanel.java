@@ -59,6 +59,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int dialogueState = 3;
     public final int characterState = 4;
 
+    public final int loseState = 5;
+
     public GamePanel() throws IOException {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -120,6 +122,9 @@ public class GamePanel extends JPanel implements Runnable{
                 if(iTile[i] != null){
                     iTile[i].update();
                 }
+            }
+            if(player.life == 0 ){
+                gameState = loseState;
             }
         }
         if(gameState == pauseState){

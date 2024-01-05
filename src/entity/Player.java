@@ -90,10 +90,10 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            int entityRow = (int)this.worldY/gp.tileSize;
+            /*int entityRow = (int)this.worldY/gp.tileSize;
             int entityCol = (int)this.worldX/gp.tileSize;
 
-            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);*/
 
             //check tile Collision
             collisionON = false;
@@ -238,7 +238,7 @@ public class Player extends Entity{
     public void damageMonster(int i){//used for monsters
         if(i!= 999){
             if(!gp.monster[i].invincible){
-                gp.monster[i].life -=1;
+                gp.monster[i].life -=2;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
                 if(gp.monster[i].life<=0){
