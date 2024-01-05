@@ -20,7 +20,7 @@ public class Player extends Entity{
     public final int screenY;
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
-    public Entity currentWeapon;
+    public Entity currentWeapon = null;
     public Entity currentShield;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
@@ -50,10 +50,8 @@ public class Player extends Entity{
         //Player Status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
-        currentWeapon = new Object_Axe(gp);
     }
     public void setItems(){
-        inventory.add(currentWeapon);
     }
     public void getPlayerAttackImage(){
         attackUp1 = setup("/player/att_up_1",gp.tileSize, gp.tileSize*2);
