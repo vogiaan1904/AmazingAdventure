@@ -6,6 +6,8 @@ import monster.Monster_Orc;
 import tile_interactive.IT_dryTree;
 import tile_interactive.InteractiveTile;
 
+import java.util.Random;
+
 public class AssetSetter {
     GamePanel gp;
     public AssetSetter(GamePanel gp){
@@ -37,9 +39,17 @@ public class AssetSetter {
         i++;
 
         gp.obj[i] = new Object_Door(gp);
-        gp.obj[i].worldX = gp.tileSize*9;
-        gp.obj[i].worldY = gp.tileSize*11;
+        gp.obj[i].worldX = gp.tileSize*10;
+        gp.obj[i].worldY = gp.tileSize*12;
         i++;
+
+        gp.obj[i] = new Object_Chest(gp);
+        gp.obj[i].worldX = gp.tileSize*30;
+        gp.obj[i].worldY = gp.tileSize*37;
+        i++;
+
+
+
 
     }
 
@@ -48,26 +58,47 @@ public class AssetSetter {
         gp.npc[0].worldX = gp.tileSize*21;
         gp.npc[0].worldY = gp.tileSize*21;
 
-        gp.npc[1] = new NPC_OldMan(gp);
-        gp.npc[1].worldX = gp.tileSize*22;
-        gp.npc[1].worldY = gp.tileSize*21;
-
-        gp.npc[2] = new NPC_OldMan(gp);
-        gp.npc[2].worldX = gp.tileSize*20;
-        gp.npc[2].worldY = gp.tileSize*21;
     }
     public void setMonster(){
-        gp.monster[0] = new Monster_Orc(gp);
-        gp.monster[0].worldX = gp.tileSize*24;
-        gp.monster[0].worldY = gp.tileSize*24;
+        int index =0;
+
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*24;
+        gp.monster[index].worldY = gp.tileSize*24;
+        index++;
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*36;
+        gp.monster[index].worldY = gp.tileSize*20;
+        index++;
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*10;
+        gp.monster[index].worldY = gp.tileSize*30;
+        index++;
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*36;
+        gp.monster[index].worldY = gp.tileSize*10;
+        index++;
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*37;
+        gp.monster[index].worldY = gp.tileSize*10;
+        index++;
+        gp.monster[index] = new Monster_Orc(gp);
+        gp.monster[index].worldX = gp.tileSize*38;
+        gp.monster[index].worldY = gp.tileSize*10;
+        index++;
     }
     public void setInteractiveTile(){
         int i =0;
-        gp.iTile[i] = new IT_dryTree(gp,12,27);i++;
-        gp.iTile[i] = new IT_dryTree(gp,12,28);i++;
-        gp.iTile[i] = new IT_dryTree(gp,12,29);i++;
-        gp.iTile[i] = new IT_dryTree(gp,12,30);i++;
-        gp.iTile[i] = new IT_dryTree(gp,12,31);i++;
-        gp.iTile[i] = new IT_dryTree(gp,12,32);i++;
+        gp.iTile[i] = new IT_dryTree(gp,22,34);i++;
+        gp.iTile[i] = new IT_dryTree(gp,20,34);i++;
+        gp.iTile[i] = new IT_dryTree(gp,21,34);i++;
+        gp.iTile[i] = new IT_dryTree(gp,22,26);i++;
+        gp.iTile[i] = new IT_dryTree(gp,20,26);i++;
+        gp.iTile[i] = new IT_dryTree(gp,21,26);i++;
+
+        gp.iTile[i] = new IT_dryTree(gp,37,28);i++;
+        gp.iTile[i] = new IT_dryTree(gp,37,29);i++;
+        gp.iTile[i] = new IT_dryTree(gp,37,31);i++;
+        gp.iTile[i] = new IT_dryTree(gp,37,32);i++;
     }
 }

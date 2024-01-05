@@ -61,6 +61,10 @@ public class UI {
         }
         if(gp.gameState == gp.characterState){
             drawInventory();
+        }if(gp.player.life==0){
+
+            gp.gameState = gp.loseState;
+            drawEndScreen();
         }
     }
 
@@ -137,6 +141,14 @@ public class UI {
     public void drawPauseScreen(){
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
         String text = "PAUSED";
+        int x = getXforCenteredText(text);
+        int y;
+        y = gp.screenHeight/2;
+        g2.drawString(text,x,y);
+    }
+    public void drawEndScreen(){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
+        String text = "You Lose";
         int x = getXforCenteredText(text);
         int y;
         y = gp.screenHeight/2;
