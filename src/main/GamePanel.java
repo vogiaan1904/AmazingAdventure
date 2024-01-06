@@ -1,6 +1,7 @@
 package main;
 import entity.Entity;
 import entity.Player;
+import entity.Projectile;
 import tile_interactive.InteractiveTile;
 import tiles.TileManager;
 
@@ -45,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity monster[]  =new Entity[10];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
+    ArrayList<Entity> projectileList = new ArrayList<>();
     public InteractiveTile iTile[] = new InteractiveTile[50];
     ArrayList<Entity> entityList = new ArrayList<>();
 

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.security.Key;
 
 public class  KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
     public boolean checkDrawTime = false;
     GamePanel gp;
     public KeyHandler(GamePanel gp){
@@ -64,6 +64,9 @@ public class  KeyHandler implements KeyListener {
             if(code==KeyEvent.VK_ENTER){
                 enterPressed = true;
             }
+            if(code==KeyEvent.VK_F){
+                shotKeyPressed = true;
+            }
             if(code== KeyEvent.VK_T){
                 checkDrawTime = !checkDrawTime;
             }
@@ -117,7 +120,10 @@ public class  KeyHandler implements KeyListener {
             leftPressed = false;
         }
         if(code== KeyEvent.VK_D){
-            rightPressed = false;// on off switch check draw time
+            rightPressed = false;// on-off switch check draw time
+        }
+        if(code==KeyEvent.VK_F){
+            shotKeyPressed = false;
         }
     }
 }

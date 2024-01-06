@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.object.Object_Axe;
+import main.object.Object_FireBall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,6 +22,7 @@ public class Player extends Entity{
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public Entity currentWeapon = null;
+    public boolean isHoldingAxe = false;
     public Entity currentShield;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
@@ -46,10 +48,10 @@ public class Player extends Entity{
         worldY= gp.tileSize*23;
         speed=5;
         direction = "down";
-
         //Player Status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+        projectile = new Object_FireBall(gp);
     }
     public void setItems(){
     }
@@ -117,6 +119,7 @@ public class Player extends Entity{
 
             //check event
             gp.eHandler.checkEvent();
+
             // if collision is false, player can move
             if(!collisionON && !keyH.enterPressed){
                 switch (direction){
@@ -147,6 +150,12 @@ public class Player extends Entity{
                 standCounter=0;
             }
         }
+
+        if(gp.keyH.shotKeyPressed && !projectile.alive){
+            projectile.set();
+
+        }
+
         //this needs to be outside of key if statement
         if(invincible){
             invincibleCounter++;
@@ -203,10 +212,14 @@ public class Player extends Entity{
     }
     public void pickupObject(int i){
         String text;
-        if(i!=999){
+        if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe)){
             if(inventory.size()  != maxInventorySize){
                 inventory.add(gp.obj[i]);
                 text = "Got a " + gp.obj[i].name + "!";
+                if(gp.obj[i].type == type_axe){
+                    isHoldingAxe = true;
+                    attack = gp.obj[i].attack;
+                }
             }
             else {
                 text = "Your inventory is full!";
@@ -216,11 +229,11 @@ public class Player extends Entity{
     }
     public void interactNPC(int i){
         if(gp.keyH.enterPressed){
-            if(i!=999){ // check if it's an NPC
-                    gp.gameState = gp.dialogueState;
-                    gp.npc[i].speak();
-            }else{ // it's not an NPC => a monster
-                    attacking = true;
+            if(i!=999) { // check if it's an NPC
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }else if(isHoldingAxe){
+                attacking = true;
             }
             gp.keyH.enterPressed = false;
         }
@@ -228,7 +241,10 @@ public class Player extends Entity{
 
     public void contactMonster(int i){//used for player
         if(i!=999){
-            if(!invincible){
+            if(isHoldingAxe){
+                attacking = true;
+            }
+            if(!invincible && gp.monster[i].dying == false){
                 life-=1;
                 invincible = true;
             }
@@ -238,7 +254,7 @@ public class Player extends Entity{
     public void damageMonster(int i){//used for monsters
         if(i!= 999){
             if(!gp.monster[i].invincible){
-                gp.monster[i].life -=2;
+                gp.monster[i].life -= attack;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
                 if(gp.monster[i].life<=0){

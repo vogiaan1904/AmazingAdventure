@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Object_Door extends Entity {
     public Object_Door(GamePanel gp) {
         super(gp);
+        type = 0;
         name = "Door";
         down1 = setup("/objects/door",gp.tileSize,gp.tileSize);
         collision = true;

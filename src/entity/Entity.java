@@ -29,11 +29,14 @@ public class Entity {
     public int invincibleCounter = 0;
     public int maxLife;
     public int life;
+    public int attack;
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
+    public Projectile projectile;
+    public int useCost;
 
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
@@ -46,7 +49,6 @@ public class Entity {
     public final int type_npc = 2;
     public final int type_monster = 3;
     public final int type_axe = 4;
-    public final int type_shield = 5;
     public final int type_consumable = 6;
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool utilityTool = new UtilityTool();
@@ -200,7 +202,7 @@ public class Entity {
     }
     public void dyingAnimation(Graphics2D g2){
         dyingCounter++;
-        int i = 10;
+        int i = 5;
         if(dyingCounter<=i){changeAlpha(g2,0f);}
         if(dyingCounter > i && dyingCounter <= i*2){changeAlpha(g2,1f);}
         if(dyingCounter > i*2 && dyingCounter <= i*3){changeAlpha(g2,0f);}
@@ -210,7 +212,6 @@ public class Entity {
         if(dyingCounter > i*6 && dyingCounter <= i*7){changeAlpha(g2,0f);}
         if(dyingCounter > i*7 && dyingCounter <= i*8){changeAlpha(g2,0f);}
         if(dyingCounter>i*8){
-            dying=false;
             alive=false;
         }
     }
