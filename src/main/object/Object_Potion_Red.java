@@ -9,7 +9,7 @@ public class Object_Potion_Red  extends Entity {
     public Object_Potion_Red(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        type = type_consumable;
+        type = type_fireBall;
         name = "Red Potion";
         down1 = setup("/objects/potion_red",gp.tileSize,gp.tileSize);
     }

@@ -1,4 +1,5 @@
 package main;
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import entity.Projectile;
@@ -30,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int worldHeight= maxWorldRow*tileSize;
     //FPS
     int FPS = 60;
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     public UI ui = new UI(this);
 
@@ -46,9 +47,9 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity monster[]  =new Entity[10];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
-    ArrayList<Entity> projectileList = new ArrayList<>();
+    public ArrayList<Entity> projectileList = new ArrayList<>();
     public InteractiveTile iTile[] = new InteractiveTile[50];
-    ArrayList<Entity> entityList = new ArrayList<>();
+    public ArrayList<Entity> entityList = new ArrayList<>();
 
 
     //Game State
@@ -62,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int characterState = 4;
 
     public final int loseState = 5;
+    public PathFinder pFinder = new PathFinder(this);
 
     public GamePanel() throws IOException {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -84,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     @Override
     public void run(){
-        double drawInterval = (double) 1000000000 /FPS;  // 0.01666 seconds = frame
+        double drawInterval = (double) 1000000000/FPS;  // 0.01666 seconds = frame
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -117,6 +119,16 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                     if(!monster[i].alive){
                         monster[i] = null;
+                    }
+                }
+            }
+            for(int i=0;i<projectileList.size();i++){
+                if(projectileList.get(i) != null){
+                    if(projectileList.get(i).alive){
+                        projectileList.get(i).update();
+                    }
+                    if(!projectileList.get(i).alive){
+                        projectileList.remove(i);
                     }
                 }
             }
@@ -172,6 +184,11 @@ public class GamePanel extends JPanel implements Runnable{
             for(int i=0;i<monster.length;i++) {
                 if (monster[i] != null) {
                     entityList.add(monster[i]);
+                }
+            }
+            for(int i=0;i<projectileList.size();i++) {
+                if (projectileList.get(i) != null) {
+                    entityList.add(projectileList.get(i));
                 }
             }
 

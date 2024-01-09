@@ -25,6 +25,8 @@ public class NPC_OldMan extends Entity{
     public void speak(){
         super.speak();
 
+        onPath = true;
+
     }
 
     public void getImage(){
@@ -39,6 +41,12 @@ public class NPC_OldMan extends Entity{
     }
 
     public void setAction(){
+
+        if(onPath){
+            int goalCol = 12;
+            int goalRow= 9;
+            searchPath(goalCol, goalRow);
+        }
         actionLockCounter++;
         if(actionLockCounter == 120){ // lock for 120 frames / 2s
             //simplest AI

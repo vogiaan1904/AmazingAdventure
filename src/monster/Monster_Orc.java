@@ -42,7 +42,7 @@ public class Monster_Orc extends Entity {
 
     public void setAction(){
         actionLockCounter++;
-        if(actionLockCounter == 120){ // lock for 120 frames / 2s
+        if(actionLockCounter == 60){ // lock for 120 frames / 2s
             //simplest AI
             Random random = new Random();
             int i = random.nextInt(100)+1;

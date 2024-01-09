@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import main.object.Object_Heart;
+import main.object.Object_Mana;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,7 +12,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font Arial_40, Arial_60B;
-    BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage heart_full, heart_half, heart_blank, mana_blank, mana_full;
     public boolean messageOn = false;
     public boolean gameFinised = false;
     public String message = "";
@@ -33,6 +34,10 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+
+        Entity mana = new Object_Mana(gp);
+        mana_blank = mana.image;
+        mana_full = mana.image2;
     }
     public void showMessage(String text){
         message = text;
@@ -49,10 +54,12 @@ public class UI {
         //play game
         if(gp.gameState == gp.playState){
             drawPlayerLife();
+            drawPLayerMana();
         }
         //pause game
         if(gp.gameState == gp.pauseState){
             drawPlayerLife();
+            drawPLayerMana();
             drawPauseScreen();
         }
         //dialogue
@@ -138,6 +145,28 @@ public class UI {
             x+=gp.tileSize;
         }
     }
+    public void drawPLayerMana(){
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2+gp.tileSize+5;
+        int i = 0;
+
+        while(i< gp.player.maxMana){
+            g2.drawImage(mana_blank,x,y,null);
+            i++;
+            x+= gp.tileSize/2 + 10;
+        }
+
+        x = gp.tileSize/2;
+        y = gp.tileSize/2+gp.tileSize+5;
+        i = 0;
+
+        while (i<gp.player.mana){
+            g2.drawImage(mana_full,x,y,null);
+            i++;
+            x+= gp.tileSize/2 + 10;
+        }
+    };
+
     public void drawPauseScreen(){
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
         String text = "PAUSED";

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity{
+    public boolean unlockFireBall = false;
     KeyHandler keyH;
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
@@ -24,6 +25,7 @@ public class Player extends Entity{
     public Entity currentWeapon = null;
     public boolean isHoldingAxe = false;
     public Entity currentShield;
+    int axeDamage;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
         this.keyH = keyH;
@@ -51,7 +53,11 @@ public class Player extends Entity{
         //Player Status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+        maxMana = 4;
+        mana = maxMana;
+        attack = 5;
         projectile = new Object_FireBall(gp);
+
     }
     public void setItems(){
     }
@@ -81,7 +87,8 @@ public class Player extends Entity{
         }
         else if (keyH.downPressed || keyH.upPressed
                 || keyH.leftPressed || keyH.rightPressed ||
-                keyH.enterPressed){
+                keyH.enterPressed)
+        {
             if(keyH.upPressed){
                 direction = "up";
             }else if(keyH.downPressed){
@@ -142,6 +149,8 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
+
+
         }
         else {
             standCounter++;
@@ -150,10 +159,14 @@ public class Player extends Entity{
                 standCounter=0;
             }
         }
+        if(gp.keyH.shotKeyPressed && !projectile.alive && unlockFireBall && mana > 0 && shotAvailablCounter == 30){
+            //set the default value
+            projectile.set(worldX,worldY,direction,true);
 
-        if(gp.keyH.shotKeyPressed && !projectile.alive){
-            projectile.set();
-
+            //add to the projectile list
+            gp.projectileList.add(projectile);
+            mana--;
+            shotAvailablCounter=0;
         }
 
         //this needs to be outside of key if statement
@@ -162,6 +175,19 @@ public class Player extends Entity{
             if(invincibleCounter>60){
                 invincible = false;
                 invincibleCounter=0;
+            }
+        }
+        if(shotAvailablCounter<30){
+            shotAvailablCounter++;
+        }
+        if(mana<maxMana){
+            if(manaRecoverCounter<200  ){
+                manaRecoverCounter++;
+            }else {
+                if(mana<maxMana){
+                    mana++;
+                    manaRecoverCounter=0;
+                }
             }
         }
     }
@@ -193,7 +219,7 @@ public class Player extends Entity{
 
             //check monster collision with the updated worldX, worldY
             int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex,axeDamage);
 
             int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
             damageInteractiveTile(iTileIndex);
@@ -212,13 +238,16 @@ public class Player extends Entity{
     }
     public void pickupObject(int i){
         String text;
-        if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe)){
+        if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
             if(inventory.size()  != maxInventorySize){
                 inventory.add(gp.obj[i]);
                 text = "Got a " + gp.obj[i].name + "!";
                 if(gp.obj[i].type == type_axe){
                     isHoldingAxe = true;
-                    attack = gp.obj[i].attack;
+                    axeDamage = gp.obj[i].attack;
+                }
+                if(gp.obj[i].type == type_fireBall){
+                    unlockFireBall = true;
                 }
             }
             else {
@@ -251,10 +280,10 @@ public class Player extends Entity{
         }
     }
 
-    public void damageMonster(int i){//used for monsters
+    public void damageMonster(int i, int damage){//used for monsters
         if(i!= 999){
             if(!gp.monster[i].invincible){
-                gp.monster[i].life -= attack;
+                gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
                 if(gp.monster[i].life<=0){
