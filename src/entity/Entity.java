@@ -123,11 +123,12 @@ public class Entity {
             int nextCol = gp.pFinder.pathList.get(0).col;
             int nextRow = gp.pFinder.pathList.get(0).row;
             if(nextCol == goalCol && nextRow == goalRow){
-
+                onPath = false;
             }
         }
     }
-    public void setAction(){}
+    public void setAction(){
+    }
     public void damageReaction(){}
     public void speak(){
         if(dialogues[dialogueIndex] == null){

@@ -2,18 +2,11 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.object.Object_Axe;
 import main.object.Object_FireBall;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Player extends Entity{
     public boolean unlockFireBall = false;
@@ -99,10 +92,10 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            /*int entityRow = (int)this.worldY/gp.tileSize;
+            int entityRow = (int)this.worldY/gp.tileSize;
             int entityCol = (int)this.worldX/gp.tileSize;
 
-            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);*/
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
 
             //check tile Collision
             collisionON = false;
@@ -293,7 +286,7 @@ public class Player extends Entity{
         }
     }
     public void damageInteractiveTile(int i){
-        if(i!=999 && gp.iTile[i].destructable){
+        if(i!=999 && gp.iTile[i].destructible){
             gp.iTile[i] = gp.iTile[i].getDestroyedForm();
         }
     }

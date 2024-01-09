@@ -24,9 +24,7 @@ public class NPC_OldMan extends Entity{
     }
     public void speak(){
         super.speak();
-
         onPath = true;
-
     }
 
     public void getImage(){
@@ -41,31 +39,30 @@ public class NPC_OldMan extends Entity{
     }
 
     public void setAction(){
-
         if(onPath){
-            int goalCol = 12;
-            int goalRow= 9;
+            int goalCol = 11;
+            int goalRow = 9;
             searchPath(goalCol, goalRow);
-        }
-        actionLockCounter++;
-        if(actionLockCounter == 120){ // lock for 120 frames / 2s
-            //simplest AI
-            Random random = new Random();
-            int i = random.nextInt(100)+1;
-            if(i<=25){
-                direction = "up";
+        }else {
+            actionLockCounter++;
+            if(actionLockCounter == 120){ // lock for 120 frames / 2s
+                //simplest AI
+                Random random = new Random();
+                int i = random.nextInt(100)+1;
+                if(i<=25){
+                    direction = "up";
+                }
+                if(i>25 && i<=50){
+                    direction = "down";
+                }
+                if(i>50 && i<=75){
+                    direction = "left";
+                }
+                if(i>75){
+                    direction = "right";
+                }
+                actionLockCounter = 0;
             }
-            if(i>25 && i<=50){
-                direction = "down";
-            }
-            if(i>50 && i<=75){
-                direction = "left";
-            }
-            if(i>75){
-                direction = "right";
-            }
-            actionLockCounter = 0;
         }
     }
-
 }

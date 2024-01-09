@@ -1,6 +1,5 @@
 package ai;
 
-import entity.Projectile;
 import main.GamePanel;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class PathFinder {
     int step = 0;
     public PathFinder(GamePanel gp){
         this.gp = gp;
+        instantiateNode();
     }
     public void instantiateNode(){
         node = new Node[gp.maxWorldCol][gp.maxWorldRow];
@@ -25,8 +25,8 @@ public class PathFinder {
 
             col++;
             if(col == gp.maxWorldCol){
-                row++;
                 col = 0;
+                row++;
             }
         }
 
@@ -43,8 +43,8 @@ public class PathFinder {
 
             col++;
             if(col == gp.maxWorldCol){
-                row++;
                 col=0;
+                row++;
             }
         }
         openList.clear();
@@ -61,7 +61,7 @@ public class PathFinder {
         goalNode = node[goalCol][goalRow];
         openList.add(currentNode);
 
-        int col =0;
+        int col = 0;
         int row = 0;
 
         while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
@@ -69,8 +69,8 @@ public class PathFinder {
             if(gp.tileM.tile[tileNum].collision){
                 node[col][row].solid = true;
             }
-            for(int i=0;i<gp.iTile.length;i++){
-                if(gp.iTile[i].destructable && gp.iTile[i] != null){
+            for(int i=0;i < gp.iTile.length;i++){
+                if(gp.iTile[i] != null &&  gp.iTile[i].destructible){
                     int itCol = gp.iTile[i].worldX/gp.tileSize;
                     int itRow = gp.iTile[i].worldY/gp.tileSize;
                     node[itCol][itRow].solid = true;
@@ -127,7 +127,7 @@ public class PathFinder {
 
             for(int i=0;i<openList.size();i++){
 
-                if(openList.get(i).fCost <bestNodefCost){
+                if(openList.get(i).fCost < bestNodefCost){
                     bestNodeIndex = i;
                     bestNodefCost = openList.get(i).fCost;
                 }
