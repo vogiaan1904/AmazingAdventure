@@ -55,6 +55,7 @@ public class UI {
         if(gp.gameState == gp.playState){
             drawPlayerLife();
             drawPLayerMana();
+
         }
         //pause game
         if(gp.gameState == gp.pauseState){
@@ -176,12 +177,31 @@ public class UI {
         g2.drawString(text,x,y);
     }
     public void drawEndScreen(){
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
         String text = "You Lose";
         int x = getXforCenteredText(text);
-        int y;
-        y = gp.screenHeight/2;
+        int y = gp.tileSize*3;
+        g2.setColor(Color.WHITE);
         g2.drawString(text,x,y);
+
+
+        text = "Play Again";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*4;
+        g2.drawString(text,x,y);
+
+        if(commandNum ==0){
+            g2.setColor(new Color(255,255,255));
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "Exit To Desktop";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*2;
+        g2.drawString(text,x,y);
+        if(commandNum ==1){
+            g2.setColor(new Color(255,255,255));
+            g2.drawString(">",x-gp.tileSize,y);
+        }
     }
     public void drawDialogueScreen(){
         int x = gp.tileSize*2;

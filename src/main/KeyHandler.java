@@ -1,7 +1,9 @@
 package main;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.security.Key;
 
 public class  KeyHandler implements KeyListener {
@@ -44,7 +46,30 @@ public class  KeyHandler implements KeyListener {
                 }
             }
         }
+        if (gp.gameState == gp.loseState) {
+            if(code== KeyEvent.VK_W){
+                gp.ui.commandNum --;
+                if(gp.ui.commandNum <0){
+                    gp.ui.commandNum=0;
+                }
 
+            }
+            if(code== KeyEvent.VK_S){
+                gp.ui.commandNum ++;
+                if(gp.ui.commandNum >1){
+                    gp.ui.commandNum=1;
+                }
+            }
+            if(code==KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum==0){
+
+                    gp.resetGame();
+                }
+                if(gp.ui.commandNum==1){
+                    System.exit(0);
+                }
+            }
+        }
         else if(gp.gameState == gp.playState ){
             if(code== KeyEvent.VK_W){
                 upPressed = true;

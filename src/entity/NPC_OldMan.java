@@ -18,9 +18,9 @@ public class NPC_OldMan extends Entity{
     }
     public void setDialogue(){
         dialogues[0] = "Hi, adventurer";
-        dialogues[1] = "I'm the landlord!! \n begging me for mercy, bastard";
-        dialogues[2] = "Hey son!!";
-        dialogues[3] = "I'm Jeda";
+        dialogues[1] = "I'm Tokuda, nice to meet you ";
+        dialogues[2] = "Get keys to open doors and \n find the brightness star \n you will win";
+        dialogues[3] = "Break a leg!!!";
     }
     public void speak(){
         super.speak();
