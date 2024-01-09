@@ -38,20 +38,42 @@ public class EventHandler {
             canTouchEvent = true;
             resetEventDone();
         }
-        if(canTouchEvent == true){
-            if(hit(24,16,"right")){
-                //event happens
-                damagePit(24,16,gp.playState);
+        if(canTouchEvent){
+            // MID - UP 2 SIDES
+            for(int j =22; j<=24; j+=2){
+                String direct = "left";
+                if(j==24){
+                    direct = "right";
+                }
+                for(int i=12; i<=18; i++){
+                    if(hit(j,i,direct)){
+                        //event happens
+                        damagePit(j,i,gp.playState);
+                    }
+                }
             }
-            if(hit(23,11,"any")){
-                healingPool(23,11,gp.playState);
+            //MID - BOT 2 SIDES
+            for(int j =22; j<=24; j+=2){
+                String direct = "left";
+                if(j==24){
+                    direct = "right";
+                }
+                for(int i=23; i<=34; i++){
+                    if(hit(j,i,direct)){
+                        //event happens
+                        damagePit(j,i,gp.playState);
+                    }
+                }
             }
-            if(hit(23,12,"any")){
-                healingPool(23,12,gp.playState);
+
+            //HEALING POOL
+            for(int i = 21; i<=25; i++){
+                if(hit(i,12,"any")){
+                    healingPool(i,13,gp.playState);
+                }
             }
-            if(hit(23,13,"any")){
-                healingPool(23,13,gp.playState);
-            }
+
+
         }
     }
     public boolean hit(int col, int row, String reqDirection){
