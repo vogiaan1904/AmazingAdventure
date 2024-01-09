@@ -42,13 +42,13 @@ public class GamePanel extends JPanel implements Runnable{
 
     //Entity and Object
     public Player player = new Player(this,keyH);
-    public Entity obj[] = new Entity[10];
-    public Entity npc[]  =new Entity[10];
-    public Entity monster[]  =new Entity[10];
+    public Entity[] obj = new Entity[10];
+    public Entity[] npc =new Entity[10];
+    public Entity[] monster =new Entity[10];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
     public ArrayList<Entity> projectileList = new ArrayList<>();
-    public InteractiveTile iTile[] = new InteractiveTile[50];
+    public InteractiveTile[] iTile = new InteractiveTile[50];
     public ArrayList<Entity> entityList = new ArrayList<>();
 
 
@@ -79,10 +79,21 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setInteractiveTile();
         gameState = titleState;
     }
+    public void resetGame(){//we want to call set obj be4 the game start
+        player.setDefaultValues();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+        aSetter.setInteractiveTile();
+        gameState = playState;
+    }
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
         gameState = titleState;
+    }
+    public void endGameThread(){
+        gameThread = null;
     }
     @Override
     public void run(){
@@ -106,10 +117,11 @@ public class GamePanel extends JPanel implements Runnable{
         if(gameState == playState){
             //Player
             player.update();
+            player.setGraphics((Graphics2D) getGraphics());
             //NPC
-            for(int i=0;i<npc.length;i++){
-                if(npc[i] != null){
-                    npc[i].update();
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
                 }
             }
             for(int i=0;i<monster.length;i++){
@@ -132,17 +144,14 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
-            for(int i = 0;i<iTile.length;i++){
-                if(iTile[i] != null){
-                    iTile[i].update();
+            for (InteractiveTile interactiveTile : iTile) {
+                if (interactiveTile != null) {
+                    interactiveTile.update();
                 }
             }
             if(player.life == 0 ){
                 gameState = loseState;
             }
-        }
-        if(gameState == pauseState){
-
         }
     }
     public void paintComponent(Graphics g){
@@ -164,45 +173,44 @@ public class GamePanel extends JPanel implements Runnable{
             tileM.draw(g2);
 
             //Interactive Tile
-            for(int i = 0;i < iTile.length;i++){
-                if(iTile[i]!= null){
-                    iTile[i].draw(g2);
+            for (InteractiveTile interactiveTile : iTile) {
+                if (interactiveTile != null) {
+                    interactiveTile.draw(g2);
                 }
             }
             //Add entities to the list
             entityList.add(player);
-            for(int i=0;i<npc.length;i++){
-                if(npc[i] != null){
-                    entityList.add(npc[i]);
+            for (Entity entity1 : npc) {
+                if (entity1 != null) {
+                    entityList.add(entity1);
                 }
             }
-            for(int i=0;i<obj.length;i++) {
-                if (obj[i] != null) {
-                    entityList.add(obj[i]);
+            for (Entity element : obj) {
+                if (element != null) {
+                    entityList.add(element);
                 }
             }
-            for(int i=0;i<monster.length;i++) {
-                if (monster[i] != null) {
-                    entityList.add(monster[i]);
+            for (Entity item : monster) {
+                if (item != null) {
+                    entityList.add(item);
                 }
             }
-            for(int i=0;i<projectileList.size();i++) {
-                if (projectileList.get(i) != null) {
-                    entityList.add(projectileList.get(i));
+            for (Entity value : projectileList) {
+                if (value != null) {
+                    entityList.add(value);
                 }
             }
 
-            Collections.sort(entityList, new Comparator<Entity>() {
+            entityList.sort(new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
+                    return Integer.compare(e1.worldY, e2.worldY);
                 }
             });
 
             //Draw entities
-            for(int i=0;i<entityList.size();i++){
-                entityList.get(i).draw(g2);
+            for (Entity entity : entityList) {
+                entity.draw(g2);
             }
             //Empty entities list
             entityList.clear();

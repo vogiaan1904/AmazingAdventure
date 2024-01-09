@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UI;
 import main.object.Object_Axe;
 import main.object.Object_FireBall;
 
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class Player extends Entity{
     public boolean unlockFireBall = false;
     KeyHandler keyH;
+    Graphics2D g2;
     public final int screenX; // the position of the player ON THE SCREEN
     public final int screenY;
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -45,9 +47,13 @@ public class Player extends Entity{
         getPlayerAttackImage();
         setItems();
     }
-    public void setDefaultValues(){
+    public void setDefaultPosition(){
         worldX= gp.tileSize*23; // the position of the player ON THE MAP
         worldY= gp.tileSize*23;
+    }
+
+    public void setDefaultValues(){
+        setDefaultPosition();
         speed=5;
         direction = "down";
         //Player Status
@@ -82,6 +88,7 @@ public class Player extends Entity{
         right2= setup("/player/boy_right_2-1",gp.tileSize,gp.tileSize);
     }
     public void update(){
+
         if(attacking){
             attacking();
         }
@@ -236,12 +243,26 @@ public class Player extends Entity{
             attacking = false;
         }
     }
+    public void setGraphics(Graphics2D g2) {
+        this.g2 = g2;
+    }
+    public void drawNotification(String noti){
+        if (g2 != null) {
+            g2.setColor(new Color(70, 120, 80));
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+            int x = 20;
+            int y = gp.screenHeight / 2;
+            g2.drawString(noti, x, y);
+            System.out.println(noti);
+        }
+    }
     public void pickupObject(int i){
-        String text;
+        String notification;
         if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
             if(inventory.size()  != maxInventorySize){
                 inventory.add(gp.obj[i]);
-                text = "Got a " + gp.obj[i].name + "!";
+                notification = "Got a " + gp.obj[i].name + "!";
+                drawNotification(notification);
                 if(gp.obj[i].type == type_axe){
                     isHoldingAxe = true;
                     axeDamage = gp.obj[i].attack;
@@ -251,7 +272,8 @@ public class Player extends Entity{
                 }
             }
             else {
-                text = "Your inventory is full!";
+                notification = "Your inventory is full!";
+                drawNotification(notification);
             }
             gp.obj[i] = null;
         }
