@@ -116,6 +116,9 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
+        if(player.life == 0 ){
+            gameState = loseState;
+        }
         //update position of the player
         if(gameState == playState){
             //Player
@@ -151,9 +154,7 @@ public class GamePanel extends JPanel implements Runnable{
                     interactiveTile.update();
                 }
             }
-            if(player.life == 0 ){
-                gameState = loseState;
-            }
+
         }
     }
     public void paintComponent(Graphics g){

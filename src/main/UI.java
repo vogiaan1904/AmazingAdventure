@@ -60,7 +60,7 @@ public class UI {
 
 
         }
-        if(gp.gameState == gp.loseState || gp.player.life == 0){
+        if(gp.player.life == 0){
             drawEndScreen();
         }
         //pause game
@@ -95,38 +95,51 @@ public class UI {
     }
 
     public void drawTitleScreen(){
-        g2.setColor(new Color(70,120,80));
-        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+        g2.setColor(new Color(143, 143, 84));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
+        g2.setColor(new Color(168, 153, 132));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+
         String text = "Gangsta Vegas 2.0";
         int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
-        g2.setColor(Color.WHITE);
-        g2.drawString(text,x,y);
+        int y = gp.tileSize * 3;
 
-        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-        y += gp.tileSize*2;
-        g2.drawImage(gp.player.down1, x,y ,gp.tileSize*3, gp.tileSize*2, null);
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
+        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+        y += gp.tileSize * 2;
+
+
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize * 3, gp.tileSize * 2, null);
 
         text = "Play";
         x = getXforCenteredText(text);
-        y += gp.tileSize*4;
-        g2.drawString(text,x,y);
+        y += gp.tileSize * 4;
 
-        if(commandNum ==0){
-            g2.setColor(new Color(255,255,255));
-            g2.drawString(">",x-gp.tileSize,y);
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
+        if (commandNum == 0) {
+            g2.setColor(new Color(255, 255, 240));
+            g2.drawString(">", x - gp.tileSize, y);
         }
+
         text = "Exit";
         x = getXforCenteredText(text);
-        y += gp.tileSize*2;
-        g2.drawString(text,x,y);
-        if(commandNum ==1){
-            g2.setColor(new Color(255,255,255));
-            g2.drawString(">",x-gp.tileSize,y);
+        y += gp.tileSize * 2;
+
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
+        if (commandNum == 1) {
+            g2.setColor(new Color(255, 255, 240));
+            g2.drawString(">", x - gp.tileSize, y);
         }
-        }
+
+
+    }
     public void drawPlayerLife(){
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
@@ -178,6 +191,7 @@ public class UI {
 
     public void drawPauseScreen(){
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
+        g2.setColor( new Color(255, 255, 240));
         String text = "PAUSED";
         int x = getXforCenteredText(text);
         int y;
@@ -185,28 +199,39 @@ public class UI {
         g2.drawString(text,x,y);
     }
     public void drawEndScreen(){
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64F));
+
         String text = "You Lose";
         int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
-        g2.setColor(Color.WHITE);
-        g2.drawString(text,x,y);
+        int y = gp.tileSize * 3;
+
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
         text = "Play Again";
         x = getXforCenteredText(text);
-        y += gp.tileSize*4;
-        g2.drawString(text,x,y);
-        if(commandNum ==0){
-            g2.setColor(new Color(0,0,0));
-            g2.drawString(">",x-gp.tileSize,y);
+        y += gp.tileSize * 4;
+
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
+        if (commandNum == 0) {
+            g2.setColor(new Color(255, 255, 240));
+            g2.drawString(">", x - gp.tileSize, y);
         }
+
         text = "Exit To Desktop";
         x = getXforCenteredText(text);
-        y += gp.tileSize*2;
-        g2.drawString(text,x,y);
-        if(commandNum ==1){
-            g2.setColor(new Color(0,0,0));
-            g2.drawString(">",x-gp.tileSize,y);
+        y += gp.tileSize * 2;
+
+        g2.setColor(new Color(255, 255, 240));
+        g2.drawString(text, x, y);
+
+        if (commandNum == 1) {
+            g2.setColor(new Color(255, 255, 240));
+            g2.drawString(">", x - gp.tileSize, y);
         }
+
     }
     public void drawDialogueScreen(){
         int x = gp.tileSize*2;
@@ -274,36 +299,55 @@ public class UI {
         return x;
     }
     public void drawWinScreen(){
-        g2.setColor(new Color(70,120,80));
-        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+        g2.setColor(new Color(143, 143, 84)); // Camo Green for the background
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64F));
+
         String text = "YOU WON";
         int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
-        g2.setColor(Color.WHITE);
-        g2.drawString(text,x,y);
+        int y = gp.tileSize * 2; // Adjusted the vertical position
 
-        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-        y += gp.tileSize*2;
-        g2.drawImage(gp.player.down1, x,y ,gp.tileSize*3, gp.tileSize*2, null);
+        g2.setColor(new Color(255, 255, 240)); // Neutral color for text
+        g2.drawString(text, x, y);
+
+        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+        y += gp.tileSize * 2;
+
+// Assuming gp.player.down1 is an image, you may need to adjust the color of the image accordingly
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize * 3, gp.tileSize * 2, null);
 
         text = "Play Again";
         x = getXforCenteredText(text);
-        y += gp.tileSize*4;
-        g2.drawString(text,x,y);
+        y += gp.tileSize * 3; // Adjusted the vertical position
 
-        if(commandNum ==0){
-            g2.setColor(new Color(255,255,255));
-            g2.drawString(">",x-gp.tileSize,y);
+        g2.setColor(new Color(255, 255, 240)); // Neutral color for text
+        g2.drawString(text, x, y);
+
+        if (commandNum == 0) {
+            g2.setColor(new Color(0, 0, 0)); // Camo Green for the ">"
+            g2.drawString(">", x - gp.tileSize, y);
         }
+
         text = "Exit";
         x = getXforCenteredText(text);
-        y += gp.tileSize*2;
-        g2.drawString(text,x,y);
-        if(commandNum ==1){
-            g2.setColor(new Color(255,255,255));
-            g2.drawString(">",x-gp.tileSize,y);
+        y += gp.tileSize * 2;
+
+        g2.setColor(new Color(255, 255, 240)); // Neutral color for text
+        g2.drawString(text, x, y);
+
+        if (commandNum == 1) {
+            g2.setColor(new Color(0, 0, 0)); // Camo Green for the ">"
+            g2.drawString(">", x - gp.tileSize, y);
         }
+
+// Add a line to thank all players
+        String thanksText = "Thanks for playing!";
+        x = getXforCenteredText(thanksText);
+        y += gp.tileSize * 2; // Adjusted the vertical position
+        g2.setColor(new Color(255, 255, 240)); // Neutral color for thanks message
+        g2.drawString(thanksText, x, y);
+
+
     }
 }

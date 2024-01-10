@@ -71,7 +71,7 @@ public class TileManager {
         setup(40,"wall",true);
         setup(41,"tree",true);
         setup(42,"drytree",true);
-
+        setup(43,"bright_star",false);
 
     }
     public void setup(int index, String imageName, boolean collision){

@@ -57,7 +57,7 @@ public class EventHandler {
                 if(j==24){
                     direct = "right";
                 }
-                for(int i=12; i<=18; i++){
+                for(int i=13; i<=18; i++){
                     if(hit(j,i,direct)){
                         //event happens
                         damagePit(j,i,gp.playState);
@@ -70,7 +70,7 @@ public class EventHandler {
                 if(j==24){
                     direct = "right";
                 }
-                for(int i=23; i<=34; i++){
+                for(int i=24; i<=34; i++){
                     if(hit(j,i,direct)){
                         //event happens
                         damagePit(j,i,gp.playState);
@@ -86,10 +86,11 @@ public class EventHandler {
                 }
             }
             //WON STAR
-            for(int i = 8; i<=11; i++){
-                if(hit(i,9,"any") || hit(i,10,"any") ){
+            for(int i = 7; i<=12; i++){
+                for(int j = 7; j<=10; j++){
+                if(hit(i,j,"any") ){
                     gp.gameState = gp.winState;
-
+                }
                 }
             }
 
