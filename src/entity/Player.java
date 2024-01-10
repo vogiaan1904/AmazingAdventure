@@ -257,7 +257,10 @@ public class Player extends Entity{
         if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
             if(inventory.size()  != maxInventorySize){
                 inventory.add(gp.obj[i]);
+                gp.gameState = gp.dialogueState;
+
                 notification = "Got a " + gp.obj[i].name + "!";
+                gp.ui.currentDialogue = notification;
                 drawNotification(notification);
                 if(gp.obj[i].type == type_axe){
                     isHoldingAxe = true;

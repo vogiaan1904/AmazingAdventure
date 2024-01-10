@@ -103,6 +103,7 @@ public class EventHandler {
         gp.gameState = gameState;
         if(gp.player.life>=2){
             gp.player.life -= 1;
+            gp.ui.currentDialogue="Damages from poisonous Pit";
         }
         eventRect[col][row].eventDone = true;
     }
