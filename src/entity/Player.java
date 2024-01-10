@@ -272,6 +272,7 @@ public class Player extends Entity{
                 if(gp.obj[i].name == "Key"){
                     numKey++;
                 }
+<<<<<<< Updated upstream
                 if(gp.obj[i].name == "Door" || gp.obj[i].name == "Chest"){
                     if(numKey>0){
                         numKey--;
@@ -283,6 +284,11 @@ public class Player extends Entity{
                         }
                     }
 
+=======
+                if(gp.obj[i].name == "Chest" && numKey>0){
+                    numKey--;
+                    gp.obj[i].down1 = gp.obj[i].down2;
+>>>>>>> Stashed changes
                 }
             }
             else {

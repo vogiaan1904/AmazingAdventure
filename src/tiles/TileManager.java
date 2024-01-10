@@ -17,7 +17,7 @@ public class TileManager {
     GamePanel qp;
     public Tile[] tile;
     public int mapTileNum[][];
-    boolean drawPath = true;
+    boolean drawPath = false;
     public TileManager(GamePanel qp) throws IOException {
         this.qp = qp;
         tile = new Tile[50];

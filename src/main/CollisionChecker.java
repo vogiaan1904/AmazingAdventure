@@ -82,8 +82,17 @@ public class CollisionChecker {
                     if(qp.obj[i].collision){
                         entity.collisionON = true;
                     }if(player){
+<<<<<<< Updated upstream
                             index = i;
                         }
+=======
+                        if (qp.obj[i].name == "Door" && entity.numKey > 0){
+                            qp.obj[i] = null;
+                        }else {
+                            index = i;
+                        }
+                    }
+>>>>>>> Stashed changes
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
