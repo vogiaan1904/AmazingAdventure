@@ -48,7 +48,7 @@ public class EventHandler {
                 for(int i=12; i<=18; i++){
                     if(hit(j,i,direct)){
                         //event happens
-                        damagePit(j,i,gp.dialogueState);
+                        damagePit(j,i,gp.playState);
                     }
                 }
             }
@@ -61,7 +61,7 @@ public class EventHandler {
                 for(int i=23; i<=34; i++){
                     if(hit(j,i,direct)){
                         //event happens
-                        damagePit(j,i,gp.dialogueState);
+                        damagePit(j,i,gp.playState);
                     }
                 }
             }
@@ -103,7 +103,6 @@ public class EventHandler {
         gp.gameState = gameState;
         if(gp.player.life>=2){
             gp.player.life -= 1;
-            gp.ui.currentDialogue="Damages from poisonous Pit";
         }
         eventRect[col][row].eventDone = true;
     }
