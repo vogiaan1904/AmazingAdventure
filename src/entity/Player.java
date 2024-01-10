@@ -252,43 +252,36 @@ public class Player extends Entity{
 
     // ... (other methods)
 
-    public void pickupObject(int i){
+    public void pickupObject(int i) {
         String notification;
-        if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
-            if(inventory.size()  != maxInventorySize){
+        if (i != 999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)) {
+            if (inventory.size() != maxInventorySize) {
                 inventory.add(gp.obj[i]);
                 gp.gameState = gp.dialogueState;
 
                 notification = "Got a " + gp.obj[i].name + "!";
                 gp.ui.currentDialogue = notification;
                 drawNotification(notification);
-                if(gp.obj[i].type == type_axe){
+                if (gp.obj[i].type == type_axe) {
                     isHoldingAxe = true;
                     axeDamage = gp.obj[i].attack;
                 }
-                if(gp.obj[i].type == type_fireBall){
+                if (gp.obj[i].type == type_fireBall) {
                     unlockFireBall = true;
                 }
-                if(gp.obj[i].name == "Key"){
+                if (gp.obj[i].name == "Key") {
                     numKey++;
                 }
-<<<<<<< Updated upstream
-                if(gp.obj[i].name == "Door" || gp.obj[i].name == "Chest"){
-                    if(numKey>0){
+                if (gp.obj[i].name == "Door" || gp.obj[i].name == "Chest") {
+                    if (numKey > 0) {
                         numKey--;
                         gp.obj[i].down1 = gp.obj[i].down2;
-                        for(int j =0;j < inventory.size();j++){
-                            if (inventory.get(j).name == "Key"){
+                        for (int j = 0; j < inventory.size(); j++) {
+                            if (inventory.get(j).name == "Key") {
                                 inventory.remove(j);
                             }
                         }
                     }
-
-=======
-                if(gp.obj[i].name == "Chest" && numKey>0){
-                    numKey--;
-                    gp.obj[i].down1 = gp.obj[i].down2;
->>>>>>> Stashed changes
                 }
             }
             else {
