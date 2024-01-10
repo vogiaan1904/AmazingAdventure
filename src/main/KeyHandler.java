@@ -46,7 +46,7 @@ public class  KeyHandler implements KeyListener {
                 }
             }
         }
-        if (gp.gameState == gp.loseState) {
+        if (gp.gameState == gp.loseState || gp.gameState == gp.winState) {
             if(code== KeyEvent.VK_W){
                 gp.ui.commandNum --;
                 if(gp.ui.commandNum <0){

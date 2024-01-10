@@ -75,9 +75,9 @@ public class UI {
             drawEndScreen();
         }
         //WIN GAME
-        /*if(gp.player.E){
+        if(gp.gameState == gp.winState){
             drawWinScreen();
-        }*/
+        }
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
@@ -273,14 +273,14 @@ public class UI {
         return x;
     }
     public void drawWinScreen(){
-        g2.setColor(new Color(70,120,80));
+        g2.setColor(new Color(178, 255, 178));
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,60F));
         String text = "YOU WON";
         int x = getXforCenteredText(text);
         int y = gp.tileSize*3;
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         g2.drawString(text,x,y);
 
         x = gp.screenWidth/2 - (gp.tileSize*2)/2;

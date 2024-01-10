@@ -69,12 +69,17 @@ public class EventHandler {
             for(int i = 21; i<=25; i++){
                 if(hit(i,12,"any")){
                     healingPool(i,13,gp.playState);
+
                 }
             }
             //WON STAR
-            if(hit(11,19,"any")){
-                winGame(gp.winState);
+            for(int i = 24; i<=26; i++){
+                if(hit(14,i,"any")){
+                    gp.gameState = gp.winState;
+
+                }
             }
+
 
         }
     }
@@ -108,11 +113,7 @@ public class EventHandler {
         }
         eventRect[col][row].eventDone = true;
     }
-    public void winGame(int gameState){
-        if(gameState!= gp.winState){
-            gp.gameState = gp.winState;
-        }
-    }
+
     public void healingPool(int col, int row,int gameState){
             gp.gameState = gameState;
             if(gp.player.life>=1 && gp.player.life <6){
