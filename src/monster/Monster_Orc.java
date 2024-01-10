@@ -13,8 +13,8 @@ public class Monster_Orc extends Entity {
         this.gp = gp;
         type = 2;
         name = "Orc";
-        speed = 5;
-        maxLife = 10;
+        speed = 3;
+        maxLife = 15;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 14;
@@ -41,27 +41,35 @@ public class Monster_Orc extends Entity {
     }
 
     public void setAction(){
-        actionLockCounter++;
-        if(actionLockCounter == 60){ // lock for 120 frames / 2s
-            //simplest AI
-            Random random = new Random();
-            int i = random.nextInt(100)+1;
-            if(i<=25){
-                direction = "up";
+        if(onPath){
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            searchPath(goalCol, goalRow);
+        }else{
+            actionLockCounter++;
+            if(actionLockCounter == 60){ // lock for 120 frames / 2s
+                //simplest AI
+                Random random = new Random();
+                int i = random.nextInt(100)+1;
+                if(i<=25){
+                    direction = "up";
+                }
+                if(i>25 && i<=50){
+                    direction = "down";
+                }
+                if(i>50 && i<=75){
+                    direction = "left";
+                }
+                if(i>75){
+                    direction = "right";
+                }
+                actionLockCounter = 0;
             }
-            if(i>25 && i<=50){
-                direction = "down";
-            }
-            if(i>50 && i<=75){
-                direction = "left";
-            }
-            if(i>75){
-                direction = "right";
-            }
-            actionLockCounter = 0;
         }
+
     }
     public void damageReaction(){
+        onPath = true;
         actionLockCounter=0;
         direction = gp.player.direction;
     }

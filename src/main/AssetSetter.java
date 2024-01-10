@@ -54,8 +54,19 @@ public class AssetSetter {
         i++;
     }
     public void setMonster(){
-        int index =0;
-
+        int i =0;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*22;
+        gp.monster[i].worldY = gp.tileSize*24;
+        i++;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*23;
+        gp.monster[i].worldY = gp.tileSize*24;
+        i++;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*24;
+        gp.monster[i].worldY = gp.tileSize*24;
+        i++;
     }
     public void setInteractiveTile(){
         int i =0;

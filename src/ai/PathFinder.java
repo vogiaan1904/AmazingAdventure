@@ -55,7 +55,6 @@ public class PathFinder {
 
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow){
         resetNodes();
-
         startNode = node[startCol][startRow];
         currentNode = startNode;
         goalNode = node[goalCol][goalRow];

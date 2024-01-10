@@ -48,7 +48,7 @@ public class Player extends Entity{
 
     public void setDefaultValues(){
         setDefaultPosition();
-        speed=5;
+        speed=6;
         direction = "down";
         //Player Status
         maxLife = 6; // 2 lives = 1 heart

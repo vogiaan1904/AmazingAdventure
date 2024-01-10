@@ -17,6 +17,7 @@ public class TileManager {
     GamePanel qp;
     public Tile[] tile;
     public int mapTileNum[][];
+    boolean drawPath = true;
     public TileManager(GamePanel qp) throws IOException {
         this.qp = qp;
         tile = new Tile[50];
@@ -127,6 +128,18 @@ public class TileManager {
             if(worldCol==qp.maxWorldCol){
                 worldCol=0;
                 worldRow++;
+            }
+        }
+        if(drawPath){
+            g2.setColor(new Color(255,0,0,70));
+            for(int i =0;i < qp.pFinder.pathList.size();i++){
+                int worldX = qp.pFinder.pathList.get(i).col * qp.tileSize;
+                int worldY = qp.pFinder.pathList.get(i).row * qp.tileSize;
+                int screenX = worldX - qp.player.worldX + qp.player.screenX; //worldX and worldY are the updating position
+                // of the player on the map, so that when the worldX and worldY change => the map on the screen will change
+                int screenY = worldY - qp.player.worldY + qp.player.screenY;
+
+                g2.fillRect(screenX,screenY,qp.tileSize, qp.tileSize) ;
             }
         }
     }

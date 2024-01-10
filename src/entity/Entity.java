@@ -72,7 +72,6 @@ public class Entity {
         int startCol = (worldX + solidArea.x)/gp.tileSize;
         int startRow = (worldY + solidArea.y)/gp.tileSize;
         gp.pFinder.setNodes(startCol,startRow,goalCol,goalRow);
-
         if(gp.pFinder.search()){
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
@@ -86,7 +85,6 @@ public class Entity {
                 direction = "up";
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) {
                 direction = "down";
-
             } else if (enTopY >= nextY && enBottomY < nextY + gp.tileSize) {
                 if (enLeftX>nextX){
                     direction = "left";
@@ -94,7 +92,8 @@ public class Entity {
                 if(enLeftX < nextX){
                     direction = "right";
                 }
-            } else if (enTopY > nextY && enLeftX > nextX) {
+            }
+            else if (enTopY > nextY && enLeftX > nextX) {
                  direction = "up";
                  checkCollistion();
                  if(collisionON) {
@@ -107,7 +106,6 @@ public class Entity {
                     direction = "right";
                 }
             } else if (enTopY < nextY && enLeftX > nextX) {
-
                 direction = "down";
                 checkCollistion();
                 if(collisionON){
@@ -119,11 +117,6 @@ public class Entity {
                 if(collisionON){
                     direction = "right";
                 }
-            }
-            int nextCol = gp.pFinder.pathList.get(0).col;
-            int nextRow = gp.pFinder.pathList.get(0).row;
-            if(nextCol == goalCol && nextRow == goalRow){
-                onPath = false;
             }
         }
     }
@@ -154,11 +147,12 @@ public class Entity {
 
     public void checkCollistion(){
         collisionON = false;
+        gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this,false);
         boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
-        gp.cChecker.checkTile(this);
+        gp.cChecker.checkEntity(this, gp.iTile);
         if(this.type == 2 && contactPlayer){
             if(!gp.player.invincible){
                 gp.player.life -= 1;
