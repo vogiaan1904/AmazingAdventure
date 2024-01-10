@@ -135,7 +135,6 @@ public class Player extends Entity{
                     case "left": worldX-=speed;break;
                     case "right": worldX+=speed;break;
                 }
-
             }
 
             gp.keyH.enterPressed = false;
@@ -186,7 +185,6 @@ public class Player extends Entity{
             }else {
                     mana++;
                     manaRecoverCounter=0;
-
             }
         }
     }
@@ -271,17 +269,6 @@ public class Player extends Entity{
                 }
                 if (gp.obj[i].name == "Key") {
                     numKey++;
-                }
-                if (gp.obj[i].name == "Door" || gp.obj[i].name == "Chest") {
-                    if (numKey > 0) {
-                        numKey--;
-                        gp.obj[i].down1 = gp.obj[i].down2;
-                        for (int j = 0; j < inventory.size(); j++) {
-                            if (inventory.get(j).name == "Key") {
-                                inventory.remove(j);
-                            }
-                        }
-                    }
                 }
             }
             else {
