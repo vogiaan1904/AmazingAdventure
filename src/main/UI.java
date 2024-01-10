@@ -58,6 +58,9 @@ public class UI {
                 drawPLayerMana();
             }
 
+            if(gp.gameState == gp.loseState){
+                drawEndScreen();
+            }
         }
         //pause game
         if(gp.gameState == gp.pauseState){
@@ -73,10 +76,6 @@ public class UI {
         }
         if(gp.gameState == gp.characterState){
             drawInventory();
-        }if(gp.player.life==0){
-
-            gp.gameState = gp.loseState;
-            drawEndScreen();
         }
         //WIN GAME
        /* if(gp.gameState == gp.winState){
@@ -191,15 +190,12 @@ public class UI {
         int y = gp.tileSize*3;
         g2.setColor(Color.WHITE);
         g2.drawString(text,x,y);
-
-
         text = "Play Again";
         x = getXforCenteredText(text);
         y += gp.tileSize*4;
         g2.drawString(text,x,y);
-
         if(commandNum ==0){
-            g2.setColor(new Color(255,255,255));
+            g2.setColor(new Color(0,0,0));
             g2.drawString(">",x-gp.tileSize,y);
         }
         text = "Exit To Desktop";
@@ -207,7 +203,7 @@ public class UI {
         y += gp.tileSize*2;
         g2.drawString(text,x,y);
         if(commandNum ==1){
-            g2.setColor(new Color(255,255,255));
+            g2.setColor(new Color(0,0,0));
             g2.drawString(">",x-gp.tileSize,y);
         }
     }
