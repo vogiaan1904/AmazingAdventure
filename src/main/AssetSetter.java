@@ -10,12 +10,26 @@ import java.util.Random;
 
 public class AssetSetter {
     GamePanel gp;
+    public boolean chest1Opened = false;
+    public boolean chest2Opened = false;
+    public int chest1 = 0;
+    public int chest2 = 1;
+
     public AssetSetter(GamePanel gp){
         this.gp = gp;
     }
 
     public void setObject(){
         int i = 0;
+        gp.obj[i] = new Object_Chest(gp);
+        gp.obj[i].worldX = gp.tileSize*35;
+        gp.obj[i].worldY = gp.tileSize*8;
+        i++;
+
+        gp.obj[i] = new Object_Chest(gp);
+        gp.obj[i].worldX = gp.tileSize*30;
+        gp.obj[i].worldY = gp.tileSize*37;
+        i++;
         gp.obj[i] = new Object_Key(gp);
         gp.obj[i].worldX = gp.tileSize*21;
         gp.obj[i].worldY = gp.tileSize*18;
@@ -31,20 +45,20 @@ public class AssetSetter {
         gp.obj[i].worldY = gp.tileSize*12;
         i++;
 
-        gp.obj[i] = new Object_Chest(gp);
-        gp.obj[i].worldX = gp.tileSize*35;
-        gp.obj[i].worldY = gp.tileSize*8;
-        i++;
+        if(chest2Opened){
+            gp.obj[i] = new Object_Potion_Red(gp);
+            gp.obj[i].worldX = gp.tileSize*31;
+            gp.obj[i].worldY = gp.tileSize*37;
+            i++;
+        }
 
-        gp.obj[i] = new Object_Chest(gp);
-        gp.obj[i].worldX = gp.tileSize*30;
-        gp.obj[i].worldY = gp.tileSize*37;
-        i++;
+        if(chest1Opened){
+            gp.obj[i] = new Object_Potion_Red(gp);
+            gp.obj[i].worldX = gp.tileSize*36;
+            gp.obj[i].worldY = gp.tileSize*8;
+            i++;
+        }
 
-        gp.obj[i] = new Object_Potion_Red(gp);
-        gp.obj[i].worldX = gp.tileSize*30;
-        gp.obj[i].worldY = gp.tileSize*39;
-        i++;
     }
 
     public void setNPC(){
@@ -56,18 +70,8 @@ public class AssetSetter {
     }
     public void setMonster(){
         int i =0;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*35;
-        gp.monster[i].worldY = gp.tileSize*40;
-        i++;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*32;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*31;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
+
+
     }
     public void setInteractiveTile(){
         int i =0;
@@ -81,7 +85,6 @@ public class AssetSetter {
 
         gp.iTile[i] = new IT_dryTree(gp,37,28);i++;
         gp.iTile[i] = new IT_dryTree(gp,37,29);i++;
-        gp.iTile[i] = new IT_dryTree(gp,37,31);i++;
         gp.iTile[i] = new IT_dryTree(gp,37,32);i++;
 
         gp.iTile[i] = new IT_dryTree(gp,12,27);i++;

@@ -54,13 +54,17 @@ public class UI {
         //play game
         if(gp.gameState == gp.playState){
             drawPlayerLife();
-            drawPLayerMana();
+            if(gp.player.unlockFireBall){
+                drawPLayerMana();
+            }
 
         }
         //pause game
         if(gp.gameState == gp.pauseState){
             drawPlayerLife();
-            drawPLayerMana();
+            if(gp.player.unlockFireBall){
+                drawPLayerMana();
+            }
             drawPauseScreen();
         }
         //dialogue
