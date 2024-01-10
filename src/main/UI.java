@@ -79,7 +79,7 @@ public class UI {
             drawEndScreen();
         }
         //WIN GAME
-        /*if(gp.player.E){
+       /* if(gp.gameState == gp.winState){
             drawWinScreen();
         }*/
     }
