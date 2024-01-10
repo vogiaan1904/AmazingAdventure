@@ -20,6 +20,7 @@ public class Player extends Entity{
     public boolean isHoldingAxe = false;
     public Entity currentShield;
     int axeDamage;
+    Entity entity;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
         this.keyH = keyH;
@@ -57,6 +58,13 @@ public class Player extends Entity{
         attack = 5;
         projectile = new Object_FireBall(gp);
 
+
+
+    }
+    public void resetGame(){
+        setDefaultValues();
+        inventory.clear();
+        isHoldingAxe = false;
     }
     public void setItems(){
     }
@@ -235,23 +243,6 @@ public class Player extends Entity{
             attacking = false;
         }
     }
-    public void setGraphics(Graphics2D g2) {
-        this.g2 = g2;
-    }
-    public void drawNotification(String noti){
-        if (g2 != null) {
-            g2.setColor(new Color(70, 120, 80));
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
-            int x = 40;
-            int y = gp.screenHeight / 2;
-            g2.drawString(noti, x, y);
-            System.out.println(noti);
-        }
-    }
-
-
-    // ... (other methods)
-
     public void pickupObject(int i){
         String notification;
         if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
@@ -261,7 +252,6 @@ public class Player extends Entity{
 
                 notification = "Got a " + gp.obj[i].name + "!";
                 gp.ui.currentDialogue = notification;
-                drawNotification(notification);
                 if(gp.obj[i].type == type_axe){
                     isHoldingAxe = true;
                     axeDamage = gp.obj[i].attack;
@@ -272,7 +262,8 @@ public class Player extends Entity{
             }
             else {
                 notification = "Your inventory is full!";
-                drawNotification(notification);
+                gp.ui.currentDialogue = notification;
+
             }
             gp.obj[i] = null;
         }

@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.NPC_OldMan;
 import main.object.*;
 import monster.Monster_Orc;
@@ -66,7 +67,7 @@ public class AssetSetter {
         gp.monster[i] = new Monster_Orc(gp);
         gp.monster[i].worldX = gp.tileSize*24;
         gp.monster[i].worldY = gp.tileSize*24;
-        i++;
+
     }
     public void setInteractiveTile(){
         int i =0;
