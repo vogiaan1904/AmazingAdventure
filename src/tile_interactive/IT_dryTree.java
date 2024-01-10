@@ -8,9 +8,10 @@ public class IT_dryTree extends InteractiveTile{
     public IT_dryTree(GamePanel gp, int row, int col) {
         super(gp,col,row);
         this.gp = gp;
-
+        life = 20;
         this.worldX = gp.tileSize*col;
         this.worldY = gp.tileSize*row;
+        invincibleTime = 20;
         down1 = setup("/tiles_interactive/drytree",gp.tileSize,gp.tileSize);
         destructible = true;
     }

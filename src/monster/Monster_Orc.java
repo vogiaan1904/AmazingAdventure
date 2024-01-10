@@ -13,7 +13,7 @@ public class Monster_Orc extends Entity {
         this.gp = gp;
         onPath = false;
         type = 2;
-        attack = 3;
+        attack = 2;
         name = "Orc";
         speed = 3;
         maxLife = 15;

@@ -288,14 +288,15 @@ public class Player extends Entity{
         }
     }
 
-    public void contactMonster(int i){//used for player
+    public void contactMonster(int i){//used for player - get hit from monster
         if(i!=999){
             if(isHoldingAxe){
                 attacking = true;
             }
-            if(!invincible && !gp.monster[i].dying){
+            if(!invincible && !gp.monster[i].dying && !gp.monster[i].isResting){
                 life-=gp.monster[i].attack;
                 invincible = true;
+                isResting = true;
             }
         }
     }
@@ -328,7 +329,13 @@ public class Player extends Entity{
     }
     public void damageInteractiveTile(int i){
         if(i!=999 && gp.iTile[i].destructible){
-            gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+            if(!gp.iTile[i].invincible){
+                gp.iTile[i].life -= axeDamage;
+                gp.iTile[i].invincible = true;
+                if(gp.iTile[i].life <= 0){
+                    gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+                }
+            }
         }
     }
     public void draw(Graphics2D g2){ // draw the movement of player

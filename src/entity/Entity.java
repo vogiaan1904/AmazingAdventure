@@ -36,6 +36,8 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean isResting = false;
+    public int restingCounter = 0;
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
     public Projectile projectile;
@@ -44,7 +46,7 @@ public class Entity {
     public int numKey = 0;
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
-
+    public int invincibleTime = 60;
     public BufferedImage image,image2,image3;
     public String name;
     public boolean collision = false;
@@ -182,11 +184,17 @@ public class Entity {
             spriteCounter = 0;
         }
         if(invincible){
-
             invincibleCounter++;
-            if(invincibleCounter>60){
+            if(invincibleCounter>invincibleTime){
                 invincible = false;
                 invincibleCounter=0;
+            }
+        }
+        if(isResting){
+            restingCounter++;
+            if(restingCounter>100){
+                isResting = false;
+                restingCounter = 0;
             }
         }
     }
@@ -251,7 +259,6 @@ public class Entity {
                     hpBarOn= false;
                 }
             }
-
 
             if(invincible){
                 hpBarOn = true;

@@ -19,6 +19,12 @@ public class InteractiveTile extends Entity {
         return tile;
     }
     public void update(){
-
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter>invincibleTime){
+                invincible = false;
+                invincibleCounter=0;
+            }
+        }
     }
 }

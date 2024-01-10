@@ -93,6 +93,7 @@ public class CollisionChecker {
                         if (qp.obj[i].name == "Chest") {
                             if (qp.player.numKey > 0) {
                                 qp.obj[i].down1 = qp.obj[i].down2;
+
                                 for (int j = 0; j < qp.player.inventory.size(); j++) {
                                     if (qp.player.inventory.get(j).name == "Key") {
                                         qp.player.inventory.remove(j);
