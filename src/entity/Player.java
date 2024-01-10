@@ -2,13 +2,11 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UI;
-import main.object.Object_Axe;
 import main.object.Object_FireBall;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Player extends Entity{
     public boolean unlockFireBall = false;
@@ -40,6 +38,7 @@ public class Player extends Entity{
         getPlayerImage();
         getPlayerAttackImage();
         setItems();
+
     }
     public void setDefaultPosition(){
         worldX= gp.tileSize*23; // the position of the player ON THE MAP
@@ -185,10 +184,9 @@ public class Player extends Entity{
             if(manaRecoverCounter<200  ){
                 manaRecoverCounter++;
             }else {
-                if(mana<maxMana){
                     mana++;
                     manaRecoverCounter=0;
-                }
+
             }
         }
     }
@@ -243,13 +241,17 @@ public class Player extends Entity{
     public void drawNotification(String noti){
         if (g2 != null) {
             g2.setColor(new Color(70, 120, 80));
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
-            int x = 20;
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+            int x = 40;
             int y = gp.screenHeight / 2;
             g2.drawString(noti, x, y);
             System.out.println(noti);
         }
     }
+
+
+    // ... (other methods)
+
     public void pickupObject(int i){
         String notification;
         if(i!=999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)){
@@ -289,7 +291,7 @@ public class Player extends Entity{
             if(isHoldingAxe){
                 attacking = true;
             }
-            if(!invincible && gp.monster[i].dying == false){
+            if(!invincible && !gp.monster[i].dying){
                 life-=1;
                 invincible = true;
             }
