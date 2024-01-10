@@ -269,6 +269,21 @@ public class Player extends Entity{
                 if(gp.obj[i].type == type_fireBall){
                     unlockFireBall = true;
                 }
+                if(gp.obj[i].name == "Key"){
+                    numKey++;
+                }
+                if(gp.obj[i].name == "Door" || gp.obj[i].name == "Chest"){
+                    if(numKey>0){
+                        numKey--;
+                        gp.obj[i].down1 = gp.obj[i].down2;
+                        for(int j =0;j < inventory.size();j++){
+                            if (inventory.get(j).name == "Key"){
+                                inventory.remove(j);
+                            }
+                        }
+                    }
+
+                }
             }
             else {
                 notification = "Your inventory is full!";

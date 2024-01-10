@@ -41,7 +41,7 @@ public class Entity {
     public Projectile projectile;
     public int shotAvailablCounter = 0;
     public int useCost;
-
+    public int numKey = 0;
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
 
@@ -56,6 +56,7 @@ public class Entity {
     public final int type_consumable = 6;
     public final int type_fireBall = 7;
     public boolean onPath = false;
+    public boolean loseKey = false;
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;

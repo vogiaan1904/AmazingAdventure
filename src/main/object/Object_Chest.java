@@ -9,5 +9,6 @@ public class Object_Chest extends Entity {
         type = 0;
         name = "Chest";
         down1 = setup("/objects/chest",gp.tileSize,gp.tileSize);
+        down2 = setup("/objects/chest_opened",gp.tileSize,gp.tileSize);
     }
 }

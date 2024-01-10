@@ -13,6 +13,7 @@ public class Object_Door extends Entity {
         type = 0;
         name = "Door";
         down1 = setup("/objects/door",gp.tileSize,gp.tileSize);
+        down2 = setup("/objects/door_opened",gp.tileSize,gp.tileSize);
         collision = true;
         solidArea.x = 0;
         solidArea.y = 16;

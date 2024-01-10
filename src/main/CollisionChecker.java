@@ -82,8 +82,8 @@ public class CollisionChecker {
                     if(qp.obj[i].collision){
                         entity.collisionON = true;
                     }if(player){
-                        index = i;
-                    }
+                            index = i;
+                        }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
