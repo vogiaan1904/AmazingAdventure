@@ -19,6 +19,7 @@ public class Player extends Entity{
     public Entity currentWeapon = null;
     public boolean isHoldingAxe = false;
     public Entity currentShield;
+    Entity entity;
     int axeDamage;
     public Player(GamePanel qp, KeyHandler keyH){
         super(qp);
@@ -45,6 +46,7 @@ public class Player extends Entity{
         worldY= gp.tileSize*23;
     }
 
+
     public void setDefaultValues(){
         setDefaultPosition();
         speed=6;
@@ -57,6 +59,11 @@ public class Player extends Entity{
         attack = 5;
         projectile = new Object_FireBall(gp);
 
+    }
+    public void resetGame(){
+        setDefaultValues();
+        inventory.clear();
+        isHoldingAxe= false;
     }
     public void setItems(){
     }
@@ -99,10 +106,10 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            /*int entityRow = (int)this.worldY/gp.tileSize;
+            int entityRow = (int)this.worldY/gp.tileSize;
             int entityCol = (int)this.worldX/gp.tileSize;
 
-            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);*/
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
 
             //check tile Collision
             collisionON = false;
