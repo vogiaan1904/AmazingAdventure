@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int characterState = 4;
 
     public final int loseState = 5;
+    public final int winState = 6;
     public PathFinder pFinder = new PathFinder(this);
 
     public GamePanel() throws IOException {
