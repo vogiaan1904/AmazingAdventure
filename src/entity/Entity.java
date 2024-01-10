@@ -235,7 +235,6 @@ public class Entity {
 
             //Monster healBar
             if(type==2 && hpBarOn){
-
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
 

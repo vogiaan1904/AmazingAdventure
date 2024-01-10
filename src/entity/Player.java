@@ -134,6 +134,9 @@ public class Player extends Entity{
             //check event
             gp.eHandler.checkEvent();
 
+            //check monster if agro
+            checkMonster();
+
             // if collision is false, player can move
             if(!collisionON && !keyH.enterPressed){
                 switch (direction){
@@ -291,7 +294,7 @@ public class Player extends Entity{
                 attacking = true;
             }
             if(!invincible && !gp.monster[i].dying){
-                life-=1;
+                life-=gp.monster[i].attack;
                 invincible = true;
             }
         }
@@ -305,6 +308,20 @@ public class Player extends Entity{
                 gp.monster[i].damageReaction();
                 if(gp.monster[i].life<=0){
                     gp.monster[i].dying = true;
+                }
+            }
+        }
+    }
+    public void checkMonster(){
+        for(int i =0;i< gp.monster.length;i++){
+            if(gp.monster[i] != null){
+                int xDistance = Math.abs(gp.player.worldX - gp.monster[i].worldX);
+                int yDistance = Math.abs(gp.player.worldY - gp.monster[i].worldY);
+                int distance  = Math.max(xDistance,yDistance);
+                if(distance <= 6*gp.tileSize){
+                    gp.monster[i].onPath = true;
+                }else {
+                    gp.monster[i].onPath = false;
                 }
             }
         }

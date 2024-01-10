@@ -100,7 +100,11 @@ public class CollisionChecker {
                                 }
                                 qp.player.numKey--;
                             }
-                        }else {
+                        } else if (qp.obj[i].name == "Door") {
+                            qp.obj[i].down1 = qp.obj[i].down2;
+                            qp.obj[i].collision = false;
+
+                        } else {
                             index = i;
                         }
                     }

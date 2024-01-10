@@ -11,7 +11,9 @@ public class Monster_Orc extends Entity {
     public Monster_Orc(GamePanel gp) {
         super(gp);
         this.gp = gp;
+        onPath = false;
         type = 2;
+        attack = 3;
         name = "Orc";
         speed = 3;
         maxLife = 15;
@@ -47,7 +49,7 @@ public class Monster_Orc extends Entity {
             searchPath(goalCol, goalRow);
         }else{
             actionLockCounter++;
-            if(actionLockCounter == 60){ // lock for 120 frames / 2s
+            if(actionLockCounter == 60){ // lock for 60 frames / 1s
                 //simplest AI
                 Random random = new Random();
                 int i = random.nextInt(100)+1;
@@ -69,7 +71,6 @@ public class Monster_Orc extends Entity {
 
     }
     public void damageReaction(){
-        onPath = true;
         actionLockCounter=0;
         direction = gp.player.direction;
     }
