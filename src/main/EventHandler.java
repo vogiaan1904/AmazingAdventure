@@ -74,7 +74,7 @@ public class EventHandler {
             }
             //WON STAR
             if(hit(11,19,"any")){
-                winGame(11,19, gp.playState);
+                winGame(gp.winState);
             }
 
         }
@@ -109,7 +109,7 @@ public class EventHandler {
         }
         eventRect[col][row].eventDone = true;
     }
-    public void winGame(int col, int row, int gameState){
+    public void winGame(int gameState){
         if(gameState!= gp.winState){
             gp.gameState = gp.winState;
         }

@@ -73,9 +73,11 @@ public class UI {
 
             gp.gameState = gp.loseState;
             drawEndScreen();
-        }if(gp.gameState == gp.winState){
-            drawWinScreen();
         }
+        //WIN GAME
+        /*if(gp.player.E){
+            drawWinScreen();
+        }*/
     }
 
     public void drawSubWindow(int x, int y, int width, int height){

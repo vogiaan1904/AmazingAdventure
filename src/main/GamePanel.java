@@ -120,7 +120,6 @@ public class GamePanel extends JPanel implements Runnable{
         if(gameState == playState){
             //Player
             player.update();
-            player.setGraphics((Graphics2D) getGraphics());
             //NPC
             for (Entity entity : npc) {
                 if (entity != null) {
