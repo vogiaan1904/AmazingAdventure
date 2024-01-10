@@ -81,11 +81,13 @@ public class GamePanel extends JPanel implements Runnable{
         gameState = titleState;
     }
     public void resetGame(){//we want to call set obj be4 the game start
-        player.setDefaultValues();
+        player.resetGame();
+        entityList.clear();
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
+
         gameState = playState;
     }
     public void startGameThread(){
@@ -118,7 +120,6 @@ public class GamePanel extends JPanel implements Runnable{
         if(gameState == playState){
             //Player
             player.update();
-            player.setGraphics((Graphics2D) getGraphics());
             //NPC
             for (Entity entity : npc) {
                 if (entity != null) {

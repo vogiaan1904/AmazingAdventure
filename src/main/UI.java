@@ -74,6 +74,10 @@ public class UI {
             gp.gameState = gp.loseState;
             drawEndScreen();
         }
+        //WIN GAME
+        /*if(gp.player.E){
+            drawWinScreen();
+        }*/
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
@@ -267,5 +271,38 @@ public class UI {
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
+    }
+    public void drawWinScreen(){
+        g2.setColor(new Color(70,120,80));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,64F));
+        String text = "YOU WON";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize*3;
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x,y);
+
+        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+        y += gp.tileSize*2;
+        g2.drawImage(gp.player.down1, x,y ,gp.tileSize*3, gp.tileSize*2, null);
+
+        text = "Play Again";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*4;
+        g2.drawString(text,x,y);
+
+        if(commandNum ==0){
+            g2.setColor(new Color(255,255,255));
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "Exit";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*2;
+        g2.drawString(text,x,y);
+        if(commandNum ==1){
+            g2.setColor(new Color(255,255,255));
+            g2.drawString(">",x-gp.tileSize,y);
+        }
     }
 }

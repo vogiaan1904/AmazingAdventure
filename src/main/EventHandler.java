@@ -72,7 +72,10 @@ public class EventHandler {
                     healingPool(i,13,gp.playState);
                 }
             }
-
+            //WON STAR
+            if(hit(11,19,"any")){
+                winGame(gp.winState);
+            }
 
         }
     }
@@ -106,6 +109,11 @@ public class EventHandler {
         }
         eventRect[col][row].eventDone = true;
     }
+    public void winGame(int gameState){
+        if(gameState!= gp.winState){
+            gp.gameState = gp.winState;
+        }
+    }
     public void healingPool(int col, int row,int gameState){
             gp.gameState = gameState;
             if(gp.player.life>=1 && gp.player.life <6){
@@ -117,6 +125,7 @@ public class EventHandler {
         canTouchEvent = false;
 
     }
+
     private void resetEventDone() {
         for (int col = 0; col < gp.maxWorldCol; col++) {
             for (int row = 0; row < gp.maxWorldRow; row++) {
