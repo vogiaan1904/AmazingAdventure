@@ -38,6 +38,19 @@ public class EventHandler {
             resetEventDone();
         }
         if(canTouchEvent){
+            for(int i=12; i<=13; i++){
+                if(hit(i,24,"down")){
+                    //event happens
+                    damagePit(i,24,gp.playState);
+                }
+            }
+            //challenge pave 1
+            for(int i=23; i<=25; i++){
+                if(hit(14,i,"right")){
+                    //event happens
+                    damagePit(14,i,gp.playState);
+                }
+            }
             // MID - UP 2 SIDES
             for(int j =22; j<=24; j+=2){
                 String direct = "left";
@@ -73,8 +86,8 @@ public class EventHandler {
                 }
             }
             //WON STAR
-            for(int i = 24; i<=26; i++){
-                if(hit(14,i,"any")){
+            for(int i = 8; i<=11; i++){
+                if(hit(i,9,"any") || hit(i,10,"any") ){
                     gp.gameState = gp.winState;
 
                 }

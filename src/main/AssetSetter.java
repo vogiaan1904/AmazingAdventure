@@ -34,7 +34,10 @@ public class AssetSetter {
         gp.obj[i].worldX = gp.tileSize*21;
         gp.obj[i].worldY = gp.tileSize*18;
         i++;
-
+        gp.obj[i] = new Object_Key(gp);
+        gp.obj[i].worldX = gp.tileSize*33;
+        gp.obj[i].worldY = gp.tileSize*12;
+        i++;
         gp.obj[i] = new Object_Axe(gp);
         gp.obj[i].worldX = gp.tileSize*23;
         gp.obj[i].worldY = gp.tileSize*38;
@@ -70,8 +73,24 @@ public class AssetSetter {
     }
     public void setMonster(){
         int i =0;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*35;
+        gp.monster[i].worldY = gp.tileSize*40;
+        i++;
 
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*32;
+        gp.monster[i].worldY = gp.tileSize*42;
+        i++;
 
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*31;
+        gp.monster[i].worldY = gp.tileSize*42;
+        i++;
+
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*38;
+        gp.monster[i].worldY = gp.tileSize*10;
     }
     public void setInteractiveTile(){
         int i =0;

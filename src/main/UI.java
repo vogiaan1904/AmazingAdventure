@@ -58,9 +58,10 @@ public class UI {
                 drawPLayerMana();
             }
 
-            if(gp.gameState == gp.loseState){
-                drawEndScreen();
-            }
+
+        }
+        if(gp.gameState == gp.loseState || gp.player.life == 0){
+            drawEndScreen();
         }
         //pause game
         if(gp.gameState == gp.pauseState){
@@ -78,9 +79,9 @@ public class UI {
             drawInventory();
         }
         //WIN GAME
-       /* if(gp.gameState == gp.winState){
+        if(gp.gameState == gp.winState){
             drawWinScreen();
-        }*/
+        }
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
