@@ -99,10 +99,10 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            int entityRow = (int)this.worldY/gp.tileSize;
+            /*int entityRow = (int)this.worldY/gp.tileSize;
             int entityCol = (int)this.worldX/gp.tileSize;
 
-            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);*/
 
             //check tile Collision
             collisionON = false;

@@ -48,7 +48,7 @@ public class EventHandler {
                 for(int i=12; i<=18; i++){
                     if(hit(j,i,direct)){
                         //event happens
-                        damagePit(j,i,gp.playState);
+                        damagePit(j,i,gp.dialogueState);
                     }
                 }
             }
@@ -61,7 +61,7 @@ public class EventHandler {
                 for(int i=23; i<=34; i++){
                     if(hit(j,i,direct)){
                         //event happens
-                        damagePit(j,i,gp.playState);
+                        damagePit(j,i,gp.dialogueState);
                     }
                 }
             }
@@ -110,7 +110,7 @@ public class EventHandler {
             gp.gameState = gameState;
             if(gp.player.life>=1 && gp.player.life <6){
                 gp.player.life =6 ;
-                System.out.println("Healing!!!");
+                gp.ui.currentDialogue="You drink the holy water \n and get full health";
             }else gp.player.life = 6;
 
         eventRect[col][row].eventDone = true;
