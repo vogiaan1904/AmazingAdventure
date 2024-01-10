@@ -17,7 +17,10 @@ public class NPC_OldMan extends Entity{
         setDialogue();
     }
     public void setDialogue(){
-        dialogues[0] = "Hi, adventurer";
+        dialogues[0] = "Glad to see you the bravest Adventurer \n this island was dominated by Orc";
+        dialogues[1] = "Get keys to open secret doors \n and find the Brightest Star";
+        dialogues[2] = "The Star will give you power \n to get rid of the cursed island";
+        dialogues[3] = "Good luck !!!";
     }
     public void speak(){
         super.speak();
