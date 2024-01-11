@@ -58,9 +58,12 @@ public class UI {
                 drawPLayerMana();
             }
 
+            if(gp.player.life <= 0){
+                gp.gameState = gp.loseState;
+            }
 
         }
-        if(gp.player.life == 0){
+        if(gp.gameState == gp.loseState){
             drawEndScreen();
         }
         //pause game
