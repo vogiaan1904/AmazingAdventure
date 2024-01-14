@@ -121,6 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
         if(player.life == 0 ){
             gameState = loseState;
         }
+
         //update position of the player
         if(gameState == playState){
             //Player
