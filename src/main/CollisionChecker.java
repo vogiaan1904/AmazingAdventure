@@ -120,6 +120,11 @@ public class CollisionChecker {
                             qp.obj[i].down1 = qp.obj[i].down2;
                             qp.obj[i].collision = false;
 
+                        } else if (qp.obj[i].name == "Door_Iron") {
+                            if(true){
+                                qp.obj[i].down1 = qp.obj[i].down2;
+                                qp.obj[i].collision = false;
+                            }
                         } else {
                             index = i;
                         }
@@ -189,6 +194,7 @@ public class CollisionChecker {
         if (entity.solidArea.intersects(qp.player.solidArea)) {
             entity.collisionON = true;
             contactPlayer = true;
+
         }
         qp.player.solidArea.x = qp.player.solidAreaDefaultX;
         qp.player.solidArea.y = qp.player.solidAreaDefaultY;

@@ -3,16 +3,12 @@ package main.object;
 import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
-
-public class Object_Door extends Entity {
-    public Object_Door(GamePanel gp) {
+public class Object_Door_Iron extends Entity {
+    public Object_Door_Iron(GamePanel gp) {
         super(gp);
         type = 0;
-        name = "Door_Iron";
-        down1 = setup("/objects/door",gp.tileSize,gp.tileSize);
+        name = "Door";
+        down1 = setup("/objects/door_iron",gp.tileSize,gp.tileSize);
         down2 = setup("/objects/door_opened",gp.tileSize,gp.tileSize);
         collision = true;
         solidArea.x = 0;

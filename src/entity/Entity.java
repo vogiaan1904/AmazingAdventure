@@ -26,6 +26,7 @@ public class Entity {
     public int actionLockCounter = 0;
     public boolean invincible = false;
     public boolean attacking = false;
+    public boolean attackingPlayer = false;
     public int invincibleCounter = 0;
     public int maxLife;
     public int life;
@@ -153,15 +154,15 @@ public class Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this,false);
         boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
+        if(this.type == 2 && contactPlayer){
+            if(!gp.player.invincible){
+                attackingPlayer = true;
+            }
+        }
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
         gp.cChecker.checkEntity(this, gp.iTile);
-        if(this.type == 2 && contactPlayer){
-            if(!gp.player.invincible){
-                gp.player.life -= 1;
-                gp.player.invincible = true;
-            }
-        }
+
     }
     public void update(){
         setAction();

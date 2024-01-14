@@ -48,6 +48,11 @@ public class AssetSetter {
         gp.obj[i].worldY = gp.tileSize*12;
         i++;
 
+        gp.obj[i] = new Object_Door_Iron(gp);
+        gp.obj[i].worldX = gp.tileSize*10;
+        gp.obj[i].worldY = gp.tileSize*12;
+        i++;
+
         if(chest2Opened){
             gp.obj[i] = new Object_Potion_Red(gp);
             gp.obj[i].worldX = gp.tileSize*31;

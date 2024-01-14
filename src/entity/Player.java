@@ -106,8 +106,8 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            int entityRow = (int)this.worldY/gp.tileSize;
-            int entityCol = (int)this.worldX/gp.tileSize;
+            int entityRow = (int)(this.worldY/gp.tileSize);
+            int entityCol = (int)(this.worldX/gp.tileSize);
 
             System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
 
@@ -290,13 +290,10 @@ public class Player extends Entity{
 
     public void contactMonster(int i){//used for player - get hit from monster
         if(i!=999){
-            if(isHoldingAxe){
-                attacking = true;
-            }
             if(!invincible && !gp.monster[i].dying && !gp.monster[i].isResting){
                 life-=gp.monster[i].attack;
                 invincible = true;
-                isResting = true;
+                gp.monster[i].isResting = true;
             }
         }
     }
