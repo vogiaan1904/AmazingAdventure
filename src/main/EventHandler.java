@@ -8,9 +8,7 @@ public class EventHandler {
     boolean canTouchEvent = true;
     public EventHandler(GamePanel gp){
         this.gp = gp;
-
         eventRect = new EventRect[gp.maxWorldCol][gp.maxWorldRow];
-
         int col = 0;
         int row = 0;
         while (col <gp.maxWorldCol && row < gp.maxWorldRow){

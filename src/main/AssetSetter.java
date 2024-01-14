@@ -33,7 +33,7 @@ public class AssetSetter {
         i++;
         gp.obj[i] = new Object_Key(gp);
         gp.obj[i].worldX = gp.tileSize*21;
-        gp.obj[i].worldY = gp.tileSize*18;
+        gp.obj[i].worldY = gp.tileSize*20;
         i++;
         gp.obj[i] = new Object_Key(gp);
         gp.obj[i].worldX = gp.tileSize*33;
@@ -66,7 +66,37 @@ public class AssetSetter {
     public void setMonster(){
         int i =0;
 
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*38;
+        gp.monster[i].worldY = gp.tileSize*10;
+        i++;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*10;
+        gp.monster[i].worldY = gp.tileSize*32;
+        i++;
 
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*19;
+        gp.monster[i].worldY = gp.tileSize*38;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*23;
+        gp.monster[i].worldY = gp.tileSize*40;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*26;
+        gp.monster[i].worldY = gp.tileSize*36;
+        i++;
+        gp.currentMonsterIndex = i;
+    }
+    public void clearMonster(){
+        for(int i = gp.currentMonsterIndex;i<20;i++){
+            if(gp.monster[i]!=null){
+                gp.monster[i] = null;
+            }
+        }
     }
     public void setInteractiveTile(){
         int i =0;

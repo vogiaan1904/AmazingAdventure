@@ -44,9 +44,10 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this,keyH);
     public Entity[] obj = new Entity[10];
     public Entity[] npc =new Entity[10];
-    public Entity[] monster =new Entity[10];
+    public Entity[] monster =new Entity[20];
     //this doesn't mean having only 10 objs, but can displaying 10 objs
     // at the same time
+    public int currentMonsterIndex = 0;
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public InteractiveTile[] iTile = new InteractiveTile[50];
     public ArrayList<Entity> entityList = new ArrayList<>();
@@ -86,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
+        aSetter.clearMonster();
         aSetter.setInteractiveTile();
 
         gameState = playState;
@@ -158,7 +160,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void paintComponent(Graphics g){
-        long drawStart= 0;
+        long drawStart = 0;
         long drawEnd;
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();

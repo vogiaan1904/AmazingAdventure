@@ -3,6 +3,8 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.object.Object_FireBall;
+import monster.Monster_Orc;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -39,7 +41,6 @@ public class Player extends Entity{
         getPlayerImage();
         getPlayerAttackImage();
         setItems();
-
     }
     public void setDefaultPosition(){
         worldX= gp.tileSize*23; // the position of the player ON THE MAP
@@ -64,6 +65,7 @@ public class Player extends Entity{
         setDefaultValues();
         inventory.clear();
         isHoldingAxe= false;
+        unlockFireBall = false;
     }
     public void setItems(){
     }
@@ -258,10 +260,41 @@ public class Player extends Entity{
                 gp.ui.currentDialogue = notification;
 
                 if (gp.obj[i].type == type_axe) {
+                    gp.gameState = gp.dialogueState;
+                    notification = "Press Enter to use!";
+                    gp.ui.currentDialogue = notification;
+
                     isHoldingAxe = true;
                     axeDamage = gp.obj[i].attack;
+
                 }
                 if (gp.obj[i].type == type_fireBall) {
+                    gp.gameState = gp.dialogueState;
+                    notification = "You've unlocked a new skill \n Press F to see what you can do !";
+                    gp.ui.currentDialogue = notification;
+
+                    int maxIndex = gp.currentMonsterIndex;
+                    gp.monster[maxIndex] = new Monster_Orc(gp);
+                    gp.monster[maxIndex].worldX = gp.tileSize*35;
+                    gp.monster[maxIndex].worldY = gp.tileSize*40;
+                    maxIndex++;
+
+                    gp.monster[maxIndex] = new Monster_Orc(gp);
+                    gp.monster[maxIndex].worldX = gp.tileSize*34;
+                    gp.monster[maxIndex].worldY = gp.tileSize*42;
+                    maxIndex++;
+
+                    gp.monster[maxIndex] = new Monster_Orc(gp);
+                    gp.monster[maxIndex].worldX = gp.tileSize*31;
+                    gp.monster[maxIndex].worldY = gp.tileSize*42;
+                    maxIndex++;
+
+                    gp.monster[maxIndex] = new Monster_Orc(gp);
+                    gp.monster[maxIndex].worldX = gp.tileSize*36;
+                    gp.monster[maxIndex].worldY = gp.tileSize*37;
+                    maxIndex++;
+
+                    gp.currentMonsterIndex = maxIndex;
                     unlockFireBall = true;
                 }
                 if (gp.obj[i].name == "Key") {
