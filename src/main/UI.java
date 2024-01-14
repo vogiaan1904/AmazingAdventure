@@ -98,13 +98,13 @@ public class UI {
     }
 
     public void drawTitleScreen(){
-        g2.setColor(new Color(143, 143, 84));
+        g2.setColor(new Color(0, 204, 102));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         g2.setColor(new Color(168, 153, 132));
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
 
-        String text = "Gangsta Vegas 2.0";
+        String text = "Amazing Adventure";
         int x = getXforCenteredText(text);
         int y = gp.tileSize * 3;
 
