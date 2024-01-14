@@ -90,6 +90,7 @@ public class EventHandler {
                 for(int j = 7; j<=10; j++){
                 if(hit(i,j,"any") ){
                     gp.gameState = gp.winState;
+                    gp.resetGame();
                 }
                 }
             }

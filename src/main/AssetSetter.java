@@ -65,6 +65,44 @@ public class AssetSetter {
     }
     public void setMonster(){
         int i =0;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*35;
+        gp.monster[i].worldY = gp.tileSize*40;
+        i++;
+
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*32;
+        gp.monster[i].worldY = gp.tileSize*42;
+        i++;
+
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*31;
+        gp.monster[i].worldY = gp.tileSize*42;
+        i++;
+
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*38;
+        gp.monster[i].worldY = gp.tileSize*10;
+        i++;
+        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i].worldX = gp.tileSize*10;
+        gp.monster[i].worldY = gp.tileSize*32;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*19;
+        gp.monster[i].worldY = gp.tileSize*38;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*23;
+        gp.monster[i].worldY = gp.tileSize*40;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*26;
+        gp.monster[i].worldY = gp.tileSize*35;
+        i++;
 
 
     }
