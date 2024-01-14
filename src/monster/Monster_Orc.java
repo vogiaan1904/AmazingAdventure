@@ -31,8 +31,6 @@ public class Monster_Orc extends Entity {
         getImage();
         getAttackImage();
     }
-
-
     public void getImage(){
         up1 = setup("/monster/orc_up_1",gp.tileSize,gp.tileSize);
         up2 = setup("/monster/orc_up_2",gp.tileSize,gp.tileSize);

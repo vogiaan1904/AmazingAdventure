@@ -45,6 +45,7 @@ public class Entity {
     public int shotAvailablCounter = 0;
     public int useCost;
     public int numKey = 0;
+    public int numFinalKey = 0;
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
     public int invincibleTime = 60;
@@ -193,7 +194,7 @@ public class Entity {
         }
         if(isResting){
             restingCounter++;
-            if(restingCounter>100){
+            if(restingCounter>20){
                 isResting = false;
                 restingCounter = 0;
             }

@@ -3,6 +3,7 @@ package main;
 import entity.NPC_OldMan;
 import main.object.*;
 import monster.Monster_Orc;
+import monster.Monster_Slime;
 import tile_interactive.IT_dryTree;
 import tile_interactive.InteractiveTile;
 
@@ -53,20 +54,6 @@ public class AssetSetter {
         gp.obj[i].worldY = gp.tileSize*12;
         i++;
 
-        if(chest2Opened){
-            gp.obj[i] = new Object_Potion_Red(gp);
-            gp.obj[i].worldX = gp.tileSize*31;
-            gp.obj[i].worldY = gp.tileSize*37;
-            i++;
-        }
-
-        if(chest1Opened){
-            gp.obj[i] = new Object_Potion_Red(gp);
-            gp.obj[i].worldX = gp.tileSize*36;
-            gp.obj[i].worldY = gp.tileSize*8;
-            i++;
-        }
-
     }
 
     public void setNPC(){
@@ -78,28 +65,8 @@ public class AssetSetter {
     }
     public void setMonster(){
         int i =0;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*35;
-        gp.monster[i].worldY = gp.tileSize*40;
-        i++;
 
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*32;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
 
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*31;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
-
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*38;
-        gp.monster[i].worldY = gp.tileSize*10;
-        i++;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*10;
-        gp.monster[i].worldY = gp.tileSize*32;
     }
     public void setInteractiveTile(){
         int i =0;

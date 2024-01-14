@@ -267,6 +267,9 @@ public class Player extends Entity{
                 if (gp.obj[i].name == "Key") {
                     numKey++;
                 }
+                if (gp.obj[i].name == "FinalKey") {
+                    numFinalKey++;
+                }
             }
             else {
                 notification = "Your inventory is full!";

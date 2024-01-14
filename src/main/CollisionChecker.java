@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import main.object.Object_FinalKey;
 import main.object.Object_Potion_Red;
 
 import java.sql.SQLOutput;
@@ -97,7 +98,7 @@ public class CollisionChecker {
 
                                 if(i==0){
                                     int lastIndex = qp.obj.length - 1;
-                                    qp.obj[lastIndex] = new Object_Potion_Red(qp);
+                                    qp.obj[lastIndex] = new Object_FinalKey(qp);
                                     qp.obj[lastIndex].worldX = qp.tileSize*36;
                                     qp.obj[lastIndex].worldY = qp.tileSize*8;
                                 }
@@ -121,7 +122,7 @@ public class CollisionChecker {
                             qp.obj[i].collision = false;
 
                         } else if (qp.obj[i].name == "Door_Iron") {
-                            if(true){
+                            if(qp.player.numFinalKey>0){
                                 qp.obj[i].down1 = qp.obj[i].down2;
                                 qp.obj[i].collision = false;
                             }

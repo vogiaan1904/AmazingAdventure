@@ -4,11 +4,11 @@ import entity.Entity;
 import main.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Monster_Slime extends Entity {
     GamePanel gp;
-
     public Monster_Slime(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -17,7 +17,7 @@ public class Monster_Slime extends Entity {
         attack = 2;
         name = "Slime";
         speed = 2;
-        maxLife = 15;
+        maxLife = 20;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 3;
@@ -56,8 +56,55 @@ public class Monster_Slime extends Entity {
             }
         }
     }
+    public void draw(Graphics2D g2){
+        BufferedImage image = null;
+        int screenX = worldX - gp.player.worldX + gp.player.screenX; //worldX and worldY are the updating position
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+        if(worldX + gp.tileSize > gp.player.worldX-gp.player.screenX &&
+                worldX - gp.tileSize< gp.player.worldX+gp.player.screenX &&
+                worldY + gp.tileSize> gp.player.worldY-gp.player.screenY &&
+                worldY - gp.tileSize< gp.player.worldY+gp.player.screenY){
+
+            if(spriteNum == 1){
+                image = down1;
+            }
+            if(spriteNum == 2){
+                image = down2;
+            }
+
+            //Monster healBar
+            if(type==2 && hpBarOn){
+                double oneScale = (double)gp.tileSize/maxLife;
+                double hpBarValue = oneScale*life;
+
+                g2.setColor(new Color(35,35,35));
+                g2.fillRect(screenX-2,screenY-14,gp.tileSize+4, 14);
+
+                g2.setColor(new Color(255,0,30));
+                g2.fillRect(screenX,screenY-12,(int)hpBarValue,10);
+
+                hpBarCounter++;
+
+                if(hpBarCounter>600){
+                    hpBarCounter=0;
+                    hpBarOn= false;
+                }
+            }
+
+            if(invincible){
+                hpBarOn = true;
+                hpBarCounter=0;
+                changeAlpha(g2,0.4f);
+            }
+            if(dying){
+                dyingAnimation(g2);
+            }
+            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            changeAlpha(g2,1f);
+        }
+    }
     public void getImage(){
-        down1 = setup("/greenslime_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("/greenslime_down_2",gp.tileSize,gp.tileSize);
+        down1 = setup("/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
     }
 }
