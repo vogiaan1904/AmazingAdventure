@@ -126,9 +126,15 @@ public class CollisionChecker {
                                 qp.obj[i].down1 = qp.obj[i].down2;
                                 qp.obj[i].collision = false;
                             }
-                        } else if (qp.obj[i].name == "Metal_Plate" && entity.direction == "up") {
-                            qp.obj[i].collision = true;
-
+                        } else if (qp.obj[i].name == "Metal_Plate") {
+                            if(entity == qp.player){
+                                if(entity.direction == "down"){
+                                    qp.obj[i].collision = false;
+                                }
+                            }
+                            if(entity.direction == "up"){
+                                qp.obj[i].collision = true;
+                            }
                         } else {
                             index = i;
                         }

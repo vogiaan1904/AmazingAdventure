@@ -33,7 +33,6 @@ public class Monster_Slime extends Entity {
     }
 
     public void setAction(){
-
         actionLockCounter++;
         if(actionLockCounter == 60){ // lock for 60 frames / 1s
             //simplest AI
@@ -53,8 +52,9 @@ public class Monster_Slime extends Entity {
             }
             actionLockCounter = 0;
         }
-
-        if(!projectile.alive && shotAvailablCounter == 30){
+        Random random = new Random();
+        int i = random.nextInt(100)+1;
+        if(i > 99 && !projectile.alive && shotAvailablCounter == 30){
             System.out.println("shot!");
             projectile.set(worldX,worldY,direction,true);
             gp.projectileList.add(projectile);
