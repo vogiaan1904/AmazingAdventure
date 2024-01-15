@@ -156,13 +156,18 @@ public class Entity {
         gp.cChecker.checkObject(this,false);
         boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
         if(this.type == 2 && contactPlayer){
-            if(!gp.player.invincible){
-                attackingPlayer = true;
-            }
+            damagePlayer(attack);
         }
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
         gp.cChecker.checkEntity(this, gp.iTile);
+
+    }
+    public void damagePlayer(int attack){
+        if(!gp.player.invincible){
+            gp.player.life -= attack;
+            gp.player.invincible = true;
+        }
 
     }
     public void update(){

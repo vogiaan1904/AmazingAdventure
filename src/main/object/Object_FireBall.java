@@ -6,8 +6,8 @@ import main.GamePanel;
 
 public class Object_FireBall extends Projectile {
     GamePanel gp;
-    public Object_FireBall(GamePanel gp) {
-        super(gp);
+    public Object_FireBall(GamePanel gp, Entity user) {
+        super(gp,user);
         this.gp = gp;
         name = "FireBall";
         speed = 8;

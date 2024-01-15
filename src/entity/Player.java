@@ -58,7 +58,7 @@ public class Player extends Entity{
         maxMana = 4;
         mana = maxMana;
         attack = 5;
-        projectile = new Object_FireBall(gp);
+        projectile = new Object_FireBall(gp , this);
 
     }
     public void resetGame(){
@@ -173,10 +173,9 @@ public class Player extends Entity{
         if(gp.keyH.shotKeyPressed && !projectile.alive && unlockFireBall && mana > 0 && shotAvailablCounter == 30){
             //set the default value
             projectile.set(worldX,worldY,direction,true);
-
             //add to the projectile list
             gp.projectileList.add(projectile);
-            mana--;
+            mana-= projectile.useCost;
             shotAvailablCounter=0;
         }
 
@@ -326,12 +325,7 @@ public class Player extends Entity{
 
     public void contactMonster(int i){//used for player - get hit from monster
         if(i!=999){
-            if(!invincible && !gp.monster[i].dying && !gp.monster[i].isResting){
-                life-=gp.monster[i].attack;
-                gp.monster[i].attackingPlayer = false;
-                invincible = true;
-                gp.monster[i].isResting = true;
-            }
+
         }
     }
 

@@ -2,6 +2,7 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
+import main.object.Object_Rock;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.util.Random;
 
 public class Monster_Slime extends Entity {
     GamePanel gp;
+
     public Monster_Slime(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -27,33 +29,36 @@ public class Monster_Slime extends Entity {
         solidArea.width = 42;
         solidArea.height = 30;
         getImage();
+        projectile = new Object_Rock(gp,this);
     }
 
     public void setAction(){
-        if(onPath){
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-            searchPath(goalCol, goalRow);
-        }else{
-            actionLockCounter++;
-            if(actionLockCounter == 60){ // lock for 60 frames / 1s
-                //simplest AI
-                Random random = new Random();
-                int i = random.nextInt(100)+1;
-                if(i<=25){
-                    direction = "up";
-                }
-                if(i>25 && i<=50){
-                    direction = "down";
-                }
-                if(i>50 && i<=75){
-                    direction = "left";
-                }
-                if(i>75){
-                    direction = "right";
-                }
-                actionLockCounter = 0;
+
+        actionLockCounter++;
+        if(actionLockCounter == 60){ // lock for 60 frames / 1s
+            //simplest AI
+            Random random = new Random();
+            int i = random.nextInt(100)+1;
+            if(i<=25){
+                direction = "up";
             }
+            if(i>25 && i<=50){
+                direction = "down";
+            }
+            if(i>50 && i<=75){
+                direction = "left";
+            }
+            if(i>75){
+                direction = "right";
+            }
+            actionLockCounter = 0;
+        }
+
+        if(!projectile.alive && shotAvailablCounter == 30){
+            System.out.println("shot!");
+            projectile.set(worldX,worldY,direction,true);
+            gp.projectileList.add(projectile);
+            shotAvailablCounter = 0;
         }
     }
     public void draw(Graphics2D g2){
