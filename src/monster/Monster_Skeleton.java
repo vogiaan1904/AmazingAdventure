@@ -20,14 +20,15 @@ public class Monster_Skeleton extends Entity {
         maxLife = 50;
         life = maxLife;
         solidArea = new Rectangle();
-        solidArea.x = 28;
-        solidArea.y = 56;
+        solidArea.x = 16;
+        solidArea.y = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 40;
         solidArea.height = 40;
         attackArea.width=36;
         attackArea.height=36;
+        collision = false;
         getImage();
         getAttackImage();
     }
@@ -55,13 +56,14 @@ public class Monster_Skeleton extends Entity {
 
     public void setAction(){
 
+
         if(onPath){
             int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
             searchPath(goalCol, goalRow);
-            if(attackingPlayer){
-                damagePlayer();
-            }
+        }
+        else if(attackingPlayer){
+            attackingPlayer();
         }
         else {
             actionLockCounter++;
@@ -89,21 +91,20 @@ public class Monster_Skeleton extends Entity {
         actionLockCounter=0;
         direction = gp.player.direction;
     }
-    public void damagePlayer(){
+    public void attackingPlayer(){
         spriteCounter++;
         if(spriteCounter<=5){
             spriteNum = 1;
         }
         if(spriteCounter>5 && spriteCounter <=25){
             spriteNum = 2;
-
             //save the current worldX, worldY, solidArea
             int currentWorldX = worldX;
             int currentWorldY = worldY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
 
-            //adjust player's worldX, worldY for the solidArea
+            //adjust monster's worldX, worldY for the solidArea
             switch(direction){
                 case "up":worldY-=attackArea.height;break;
                 case "down":worldY+=attackArea.height;break;

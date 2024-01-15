@@ -157,6 +157,7 @@ public class Entity {
         boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
         if(this.type == 2 && contactPlayer){
             damagePlayer(attack);
+            attackingPlayer = true;
         }
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
@@ -164,11 +165,11 @@ public class Entity {
 
     }
     public void damagePlayer(int attack){
+        attackingPlayer = false;
         if(!gp.player.invincible){
             gp.player.life -= attack;
             gp.player.invincible = true;
         }
-
     }
     public void update(){
         setAction();
