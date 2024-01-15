@@ -8,7 +8,7 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("PLayBoi Game Project");
+        window.setTitle("Amazing Adventure");
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();

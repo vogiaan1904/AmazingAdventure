@@ -90,7 +90,7 @@ public class Player extends Entity{
         right2= setup("/player/boy_right_2-1",gp.tileSize,gp.tileSize);
     }
     public void update(){
-
+        gp.eHandler.checkEvent();
         if(attacking){
             attacking();
         }
@@ -108,10 +108,10 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            int entityRow = (int)(this.worldY/gp.tileSize);
+            /*int entityRow = (int)(this.worldY/gp.tileSize);
             int entityCol = (int)(this.worldX/gp.tileSize);
 
-            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);
+            System.out.println("Player Position Col:"+ entityCol + " Row: "+entityRow);*/
 
             //check tile Collision
             collisionON = false;
@@ -250,6 +250,7 @@ public class Player extends Entity{
 
     public void pickupObject(int i) {
         String notification;
+        gp.eHandler.checkEvent();
         if (i != 999 && (gp.obj[i].type == type_consumable || gp.obj[i].type == type_axe || gp.obj[i].type == type_fireBall)) {
             if (inventory.size() != maxInventorySize) {
                 inventory.add(gp.obj[i]);
@@ -301,6 +302,7 @@ public class Player extends Entity{
                 }
                 if (gp.obj[i].name == "FinalKey") {
                     numFinalKey++;
+
                 }
             }
             else {
@@ -309,6 +311,7 @@ public class Player extends Entity{
 
             }
             gp.obj[i] = null;
+            gp.eHandler.checkEvent();
         }
     }
     public void interactNPC(int i){
