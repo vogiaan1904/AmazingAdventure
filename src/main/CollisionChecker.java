@@ -126,6 +126,9 @@ public class CollisionChecker {
                                 qp.obj[i].down1 = qp.obj[i].down2;
                                 qp.obj[i].collision = false;
                             }
+                        } else if (qp.obj[i].name == "Metal_Plate" && entity.direction == "up") {
+                            qp.obj[i].collision = true;
+
                         } else {
                             index = i;
                         }
@@ -176,9 +179,11 @@ public class CollisionChecker {
     }
     public boolean checkPlayer(Entity entity, boolean player) {
             boolean contactPlayer = false;
+
             //get the entity's solid area position
             entity.solidArea.x = entity.worldX + entity.solidArea.x; //updating the solid area x and y
             entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
             //get the object's solid area position
             qp.player.solidArea.x = qp.player.worldX + qp.player.solidArea.x;
             qp.player.solidArea.y = qp.player.worldY + qp.player.solidArea.y;
@@ -195,7 +200,6 @@ public class CollisionChecker {
         if (entity.solidArea.intersects(qp.player.solidArea)) {
             entity.collisionON = true;
             contactPlayer = true;
-
         }
         qp.player.solidArea.x = qp.player.solidAreaDefaultX;
         qp.player.solidArea.y = qp.player.solidAreaDefaultY;

@@ -328,6 +328,7 @@ public class Player extends Entity{
         if(i!=999){
             if(!invincible && !gp.monster[i].dying && !gp.monster[i].isResting){
                 life-=gp.monster[i].attack;
+                gp.monster[i].attackingPlayer = false;
                 invincible = true;
                 gp.monster[i].isResting = true;
             }

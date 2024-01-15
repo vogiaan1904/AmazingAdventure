@@ -1,5 +1,7 @@
 package main;
 import com.sun.source.tree.BreakTree;
+import main.object.Object_Metal_Plate;
+
 import java.awt.*;
 public class EventHandler {
     GamePanel gp;
@@ -32,7 +34,6 @@ public class EventHandler {
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance  = Math.max(xDistance,yDistance);
         if(distance > gp.tileSize){
-            canTouchEvent = true;
             resetEventDone();
         }
         if(canTouchEvent){
@@ -76,6 +77,7 @@ public class EventHandler {
                 }
             }
 
+
             //HEALING POOL
             for(int i = 21; i<=25; i++){
                 if(hit(i,12,"any")){
@@ -89,11 +91,9 @@ public class EventHandler {
                 if(hit(i,j,"any") ){
                     gp.gameState = gp.winState;
                     gp.resetGame();
-                }
+                    }
                 }
             }
-
-
         }
     }
     public boolean hit(int col, int row, String reqDirection){
@@ -136,8 +136,8 @@ public class EventHandler {
 
         eventRect[col][row].eventDone = true;
         canTouchEvent = false;
-
     }
+
 
     private void resetEventDone() {
         for (int col = 0; col < gp.maxWorldCol; col++) {

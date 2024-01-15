@@ -3,6 +3,7 @@ package main;
 import entity.NPC_OldMan;
 import main.object.*;
 import monster.Monster_Orc;
+import monster.Monster_Skeleton;
 import monster.Monster_Slime;
 import tile_interactive.IT_dryTree;
 import tile_interactive.InteractiveTile;
@@ -54,6 +55,10 @@ public class AssetSetter {
         gp.obj[i].worldY = gp.tileSize*12;
         i++;
 
+        gp.obj[i] = new Object_Metal_Plate(gp);
+        gp.obj[i].worldX = gp.tileSize*14;
+        gp.obj[i].worldY = gp.tileSize*27;
+        i++;
     }
 
     public void setNPC(){
@@ -65,26 +70,12 @@ public class AssetSetter {
     }
     public void setMonster(){
         int i =0;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*35;
-        gp.monster[i].worldY = gp.tileSize*40;
-        i++;
-
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*32;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
-
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*31;
-        gp.monster[i].worldY = gp.tileSize*42;
-        i++;
 
         gp.monster[i] = new Monster_Orc(gp);
         gp.monster[i].worldX = gp.tileSize*38;
         gp.monster[i].worldY = gp.tileSize*10;
         i++;
-        gp.monster[i] = new Monster_Orc(gp);
+        gp.monster[i] = new Monster_Skeleton(gp);
         gp.monster[i].worldX = gp.tileSize*10;
         gp.monster[i].worldY = gp.tileSize*32;
         i++;
@@ -103,31 +94,8 @@ public class AssetSetter {
         gp.monster[i].worldX = gp.tileSize*26;
         gp.monster[i].worldY = gp.tileSize*35;
         i++;
-
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*38;
-        gp.monster[i].worldY = gp.tileSize*10;
-        i++;
-        gp.monster[i] = new Monster_Orc(gp);
-        gp.monster[i].worldX = gp.tileSize*10;
-        gp.monster[i].worldY = gp.tileSize*32;
-        i++;
-
-        gp.monster[i] = new Monster_Slime(gp);
-        gp.monster[i].worldX = gp.tileSize*19;
-        gp.monster[i].worldY = gp.tileSize*38;
-        i++;
-
-        gp.monster[i] = new Monster_Slime(gp);
-        gp.monster[i].worldX = gp.tileSize*23;
-        gp.monster[i].worldY = gp.tileSize*40;
-        i++;
-
-        gp.monster[i] = new Monster_Slime(gp);
-        gp.monster[i].worldX = gp.tileSize*26;
-        gp.monster[i].worldY = gp.tileSize*36;
-        i++;
         gp.currentMonsterIndex = i;
+
     }
     public void clearMonster(){
         for(int i = gp.currentMonsterIndex;i<20;i++){
