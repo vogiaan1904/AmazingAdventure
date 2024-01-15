@@ -131,10 +131,10 @@ public class CollisionChecker {
                                 if(entity.direction == "down"){
                                     qp.obj[i].collision = false;
                                 }
-                            }
-                            if(entity.direction == "up"){
+                            }else{
                                 qp.obj[i].collision = true;
                             }
+
                         } else {
                             index = i;
                         }

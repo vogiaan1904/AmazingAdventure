@@ -66,6 +66,8 @@ public class Player extends Entity{
         inventory.clear();
         isHoldingAxe= false;
         unlockFireBall = false;
+        numFinalKey = 0;
+        numKey = 0;
     }
     public void setItems(){
     }

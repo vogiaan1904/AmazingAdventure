@@ -16,7 +16,7 @@ public class Monster_Slime extends Entity {
         this.gp = gp;
         onPath = false;
         type = 2;
-        attack = 1;
+        attack = 0;
         name = "Slime";
         speed = 2;
         maxLife = 10;
@@ -59,6 +59,9 @@ public class Monster_Slime extends Entity {
             projectile.set(worldX,worldY,direction,true);
             gp.projectileList.add(projectile);
             shotAvailablCounter = 0;
+        }
+        if(shotAvailablCounter<30){
+            shotAvailablCounter++;
         }
     }
     public void draw(Graphics2D g2){

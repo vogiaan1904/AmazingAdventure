@@ -9,7 +9,7 @@ public class Object_Metal_Plate extends Entity {
         type = 0;
         name = "Metal_Plate";
         down1 = setup("/objects/metalplate",gp.tileSize,gp.tileSize);
-        collision = false;
+        collision = true;
         solidArea.x = 0;
         solidArea.y = 16;
         solidArea.width = 40;
