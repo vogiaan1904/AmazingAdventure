@@ -16,10 +16,10 @@ public class Monster_Slime extends Entity {
         this.gp = gp;
         onPath = false;
         type = 2;
-        attack = 2;
+        attack = 1;
         name = "Slime";
         speed = 2;
-        maxLife = 20;
+        maxLife = 10;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 3;
