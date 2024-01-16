@@ -201,51 +201,7 @@ public class Player extends Entity{
             }
         }
     }
-    public void attacking(){
-        spriteCounter++;
-        if(spriteCounter<=5){
-            spriteNum = 1;
-        }
-        if(spriteCounter>5 && spriteCounter <=25){
-            spriteNum = 2;
 
-            //save the current worldX, worldY, solidArea
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            //adjust player's worldX, worldY for the solidArea
-            switch(direction){
-                case "up":worldY-=attackArea.height;break;
-                case "down":worldY+=attackArea.height;break;
-                case "left":worldX-=attackArea.width;break;
-                case "right":worldX+=attackArea.width;break;
-            }
-
-            //attackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-
-            //check monster collision with the updated worldX, worldY
-            int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
-            damageMonster(monsterIndex,axeDamage);
-
-            int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
-            damageInteractiveTile(iTileIndex);
-
-            //after checking collision, restore the original data
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-        }
-        if(spriteCounter>25){
-            spriteNum = 1;
-            spriteCounter = 0;
-            attacking = false;
-        }
-    }
 
 
     // ... (other methods)

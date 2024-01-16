@@ -59,9 +59,6 @@ public class Monster_Orc extends Entity {
             int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
             searchPath(goalCol, goalRow);
 
-        }
-        else if(attackingPlayer){
-                damagePlayer();
         } else {
             actionLockCounter++;
             if(actionLockCounter == 60){ // lock for 60 frames / 1s
@@ -83,132 +80,13 @@ public class Monster_Orc extends Entity {
                 actionLockCounter = 0;
             }
         }
+        if(!attacking){
+            checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
+        }
     }
     public void damageReaction(){
         actionLockCounter=0;
         direction = gp.player.direction;
     }
-    public void damagePlayer(){
-        spriteCounter++;
-        if(spriteCounter<=5){
-            spriteNum = 1;
-        }
-        if(spriteCounter>5 && spriteCounter <=25){
-            spriteNum = 2;
 
-            //save the current worldX, worldY, solidArea
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            //adjust player's worldX, worldY for the solidArea
-            switch(direction){
-                case "up":worldY-=attackArea.height;break;
-                case "down":worldY+=attackArea.height;break;
-                case "left":worldX-=attackArea.width;break;
-                case "right":worldX+=attackArea.width;break;
-            }
-
-            //attackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-
-            //after checking collision, restore the original data
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-        }
-        if(spriteCounter>25){
-            spriteNum = 1;
-            spriteCounter = 0;
-            attackingPlayer = false;
-        }
-    }
-    public void draw(Graphics2D g2){
-        BufferedImage image = null;
-        int screenX = worldX - gp.player.worldX + gp.player.screenX; //worldX and worldY are the updating position
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
-        int tempScreenX = screenX;
-        int tempScreenY = screenY;
-        if(worldX + gp.tileSize > gp.player.worldX-gp.player.screenX &&
-                worldX - gp.tileSize< gp.player.worldX+gp.player.screenX &&
-                worldY + gp.tileSize> gp.player.worldY-gp.player.screenY &&
-                worldY - gp.tileSize< gp.player.worldY+gp.player.screenY){
-            switch (direction){
-                case "up" :
-                    if(!attackingPlayer) {
-                        if (spriteNum == 1) image = up1;
-                        if (spriteNum == 2) image = up2;
-                    }
-                    if(attackingPlayer){
-                        tempScreenY = screenY - gp.tileSize;
-                        if (spriteNum == 1) image = attackUp1;
-                        if (spriteNum == 2) image = attackUp2;
-                    }
-                    break;
-                case "down" :
-                    if(!attackingPlayer){
-                        if(spriteNum == 1)image = down1;
-                        if(spriteNum == 2)image = down2;
-                    }
-                    if(attackingPlayer){
-                        if(spriteNum == 1)image = attackDown1;
-                        if(spriteNum == 2)image = attackDown2;
-                    }
-
-                    break;
-                case "left" :
-                    if(!attackingPlayer){
-                        if(spriteNum == 1)image = left1;
-                         if(spriteNum == 2)image = left2;
-                    }
-                    if(attackingPlayer){
-                        tempScreenX = screenX - gp.tileSize;
-                        if(spriteNum == 1)image = attackLeft1;
-                        if(spriteNum == 2)image = attackLeft2;
-                    }
-                    break;
-                case "right" :
-                    if(!attackingPlayer){
-                        if(spriteNum == 1)image = right1;
-                        if(spriteNum == 2)image = right2;
-                    }
-                    if(attackingPlayer){
-                        if(spriteNum == 1)image = attackRight1;
-                        if(spriteNum == 2)image = attackRight2;
-                    }
-                    break;
-            }
-            //Monster healBar
-            if(type==2 && hpBarOn){
-                double oneScale = (double)gp.tileSize/maxLife;
-                double hpBarValue = oneScale*life;
-
-                g2.setColor(new Color(35,35,35));
-                g2.fillRect(screenX-2,screenY-14,gp.tileSize+4, 14);
-
-                g2.setColor(new Color(255,0,30));
-                g2.fillRect(screenX,screenY-12,(int)hpBarValue,10);
-
-                hpBarCounter++;
-
-                if(hpBarCounter>600){
-                    hpBarCounter=0;
-                    hpBarOn= false;
-                }
-            }
-            if(invincible){
-                hpBarOn = true;
-                hpBarCounter=0;
-                changeAlpha(g2,0.4f);
-            }
-            if(dying){
-                dyingAnimation(g2);
-            }
-            g2.drawImage(image, tempScreenX, tempScreenY,null);
-            changeAlpha(g2,1f);
-        }
-    }
 }
