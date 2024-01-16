@@ -24,10 +24,14 @@ public class Monster_Orc extends Entity {
         solidArea.y = 28;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
         solidArea.width = 20;
         solidArea.height = 20;
-        attackArea.width=36;
-        attackArea.height=36;
+
+        attackArea.width=34;
+        attackArea.height=34;
+        attackArea.x = 7;
+        attackArea.y = 7;
         getImage();
         getAttackImage();
     }

@@ -55,7 +55,6 @@ public class Monster_Slime extends Entity {
         Random random = new Random();
         int i = random.nextInt(100)+1;
         if(i > 99 && !projectile.alive && shotAvailablCounter == 30){
-            System.out.println("shot!");
             projectile.set(worldX,worldY,direction,true);
             gp.projectileList.add(projectile);
             shotAvailablCounter = 0;

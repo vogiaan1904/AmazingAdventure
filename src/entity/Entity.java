@@ -155,11 +155,7 @@ public class Entity {
         collisionON = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this,false);
-        boolean contactPlayer =  gp.cChecker.checkPlayer(this, false);
-        if(this.type == 2 && contactPlayer){
-            damagePlayer(attack);
-            attackingPlayer = true;
-        }
+
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
         gp.cChecker.checkEntity(this, gp.iTile);
@@ -190,7 +186,9 @@ public class Entity {
             //attackArea becomes solidArea
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-            if(this.type == type_monster){
+
+
+            if(this.type == 2){
                 if(gp.cChecker.checkPlayer(this, false)){
                     damagePlayer(attack);
                 }
@@ -216,8 +214,37 @@ public class Entity {
             attacking = false;
         }
     }
+    public Color getParticleColor(){
+        Color color = null;
+        return color;
+    }
+    public int getParticleSize(){
+        int size = 0; // 6 pixels
+        return size;
+    }
+    public int getParticleSpeed(){
+        int speed = 0;
+        return speed;
+    }
+    public int getParticleMaxLife(){
+        int maxLife = 0;
+        return maxLife;
+    }
+    public void generateParticle(Entity generator, Entity target){
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+        Particle p1 = new Particle(gp,generator,color,size,speed,maxLife,-2,-1);
+        Particle p2 = new Particle(gp,generator,color,size,speed,maxLife,2,-1);
+        Particle p3 = new Particle(gp,generator,color,size,speed,maxLife,-2,1);
+        Particle p4 = new Particle(gp,generator,color,size,speed,maxLife,2,1);
+        gp.particleList.add(p1);
+        gp.particleList.add(p2);
+        gp.particleList.add(p3);
+        gp.particleList.add(p4);
+    }
     public void damagePlayer(int attack){
-        attackingPlayer = false;
         if(!gp.player.invincible){
             gp.player.life -= attack;
             gp.player.invincible = true;

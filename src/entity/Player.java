@@ -31,12 +31,16 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 14;
         solidArea.y = 28;
+
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
         solidArea.width = 20;
         solidArea.height = 20;
-        attackArea.width=36;
-        attackArea.height=36;
+
+        attackArea.width=30;
+        attackArea.height=30;
+
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -321,6 +325,7 @@ public class Player extends Entity{
             if(!gp.iTile[i].invincible){
                 gp.iTile[i].life -= axeDamage;
                 gp.iTile[i].invincible = true;
+                generateParticle(gp.iTile[i],gp.iTile[i]);
                 if(gp.iTile[i].life <= 0){
                     gp.iTile[i] = gp.iTile[i].getDestroyedForm();
                 }

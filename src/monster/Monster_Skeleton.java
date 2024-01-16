@@ -20,14 +20,16 @@ public class Monster_Skeleton extends Entity {
         maxLife = 50;
         life = maxLife;
         solidArea = new Rectangle();
-        solidArea.x = 16;
-        solidArea.y = 32;
+        solidArea.x = 28;
+        solidArea.y = 56;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
         solidArea.width = 40;
         solidArea.height = 40;
-        attackArea.width=36;
-        attackArea.height=36;
+
+        attackArea.width=48;
+        attackArea.height=48;
         collision = false;
         getImage();
         getAttackImage();
