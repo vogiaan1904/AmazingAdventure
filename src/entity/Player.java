@@ -54,7 +54,8 @@ public class Player extends Entity{
 
     public void setDefaultValues(){
         setDefaultPosition();
-        speed=6;
+        defaultspeed = 5;
+        speed= defaultspeed;
         direction = "down";
         //Player Status
         maxLife = 6; // 2 lives = 1 heart
@@ -180,7 +181,12 @@ public class Player extends Entity{
             //set the default value
             projectile.set(worldX,worldY,direction,true);
             //add to the projectile list
-            gp.projectileList.add(projectile);
+            for(int i = 0; i < gp.projectile.length;i++){
+                if(gp.projectile[i] == null){
+                    gp.projectile[i] = projectile;
+                    break;
+                }
+            }
             mana-= projectile.useCost;
             shotAvailablCounter=0;
         }
@@ -288,15 +294,16 @@ public class Player extends Entity{
         }
     }
 
-    public void contactMonster(int i){//used for player - get hit from monster
+    public void contactMonster(int i){//u sed for player - get hit from monster
         if(i!=999){
 
         }
     }
 
-    public void damageMonster(int i, int damage){//used for monsters
+    public void damageMonster(int i,Entity attacker, int damage){//used for monsters
         if(i!= 999){
             if(!gp.monster[i].invincible){
+                knockBack(gp.monster[i],attacker);
                 gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
@@ -332,6 +339,7 @@ public class Player extends Entity{
             }
         }
     }
+
     public void draw(Graphics2D g2){ // draw the movement of player
         BufferedImage image = null;
         int tempScreenX = screenX;

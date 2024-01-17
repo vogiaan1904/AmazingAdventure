@@ -32,10 +32,12 @@ public class AssetSetter {
         gp.obj[i].worldX = gp.tileSize*30;
         gp.obj[i].worldY = gp.tileSize*37;
         i++;
+
         gp.obj[i] = new Object_Key(gp);
         gp.obj[i].worldX = gp.tileSize*21;
         gp.obj[i].worldY = gp.tileSize*20;
         i++;
+
         gp.obj[i] = new Object_Key(gp);
         gp.obj[i].worldX = gp.tileSize*33;
         gp.obj[i].worldY = gp.tileSize*12;
@@ -59,6 +61,11 @@ public class AssetSetter {
         gp.obj[i].worldX = gp.tileSize*14;
         gp.obj[i].worldY = gp.tileSize*27;
         i++;
+
+        gp.obj[i] = new Object_Star(gp);
+        gp.obj[i].worldX = gp.tileSize*10;
+        gp.obj[i].worldY = gp.tileSize*10;
+        i++;
     }
 
     public void setNPC(){
@@ -75,6 +82,17 @@ public class AssetSetter {
         gp.monster[i].worldX = gp.tileSize*38;
         gp.monster[i].worldY = gp.tileSize*10;
         i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*37;
+        gp.monster[i].worldY = gp.tileSize*11;
+        i++;
+
+        gp.monster[i] = new Monster_Slime(gp);
+        gp.monster[i].worldX = gp.tileSize*38;
+        gp.monster[i].worldY = gp.tileSize*9;
+        i++;
+
         gp.monster[i] = new Monster_Skeleton(gp);
         gp.monster[i].worldX = gp.tileSize*10;
         gp.monster[i].worldY = gp.tileSize*32;
@@ -92,7 +110,7 @@ public class AssetSetter {
 
         gp.monster[i] = new Monster_Slime(gp);
         gp.monster[i].worldX = gp.tileSize*26;
-        gp.monster[i].worldY = gp.tileSize*35;
+        gp.monster[i].worldY = gp.tileSize*36;
         i++;
         gp.currentMonsterIndex = i;
 

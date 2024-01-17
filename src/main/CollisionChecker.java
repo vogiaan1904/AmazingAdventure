@@ -25,7 +25,11 @@ public class CollisionChecker {
         int entityBottomRow = (int) entityBottomWorldY / qp.tileSize;
 
         int tileNum1, tileNum2;
-        switch (entity.direction) {
+        String direction = entity.direction;
+        if(entity.knockBack){
+            direction = entity.knockBackDirection;
+        }
+        switch (direction) {
             case "up":
                 entityTopRow = (entityTopWorldY - entity.speed) / qp.tileSize;// convert the location to Row and Col
                 tileNum1 = qp.tileM.mapTileNum[entityLeftCol][entityTopRow];
@@ -111,11 +115,15 @@ public class CollisionChecker {
                             if(entity == qp.player){
                                 if(entity.direction == "down"){
                                     qp.obj[i].collision = false;
+                                }else {
+                                    qp.obj[i].collision = true;
                                 }
                             }else{
                                 qp.obj[i].collision = true;
                             }
 
+                        } else if (qp.obj[i].name == "Star") {
+                            qp.gameState = qp.winState;
                         } else {
                             index = i;
                         }
@@ -140,7 +148,11 @@ public class CollisionChecker {
                 target[i].solidArea.x = target[i].worldX +target[i].solidArea.x;
                 target[i].solidArea.y = target[i].worldY +target[i].solidArea.y;
 
-                switch (entity.direction){
+                String direction = entity.direction;
+                if(entity.knockBack){
+                    direction = entity.knockBackDirection;
+                }
+                switch (direction){
                     case "up":
                         entity.solidArea.y -= entity.speed;break;
                     case "down":

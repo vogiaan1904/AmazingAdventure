@@ -18,7 +18,8 @@ public class Monster_Slime extends Entity {
         type = 2;
         attack = 0;
         name = "Slime";
-        speed = 2;
+        defaultspeed = 2;
+        speed = defaultspeed;
         maxLife = 10;
         life = maxLife;
         solidArea = new Rectangle();
@@ -33,35 +34,64 @@ public class Monster_Slime extends Entity {
     }
 
     public void setAction(){
-        actionLockCounter++;
-        if(actionLockCounter == 60){ // lock for 60 frames / 1s
-            //simplest AI
+        if(onPath){
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            searchPath(goalCol, goalRow);
+
             Random random = new Random();
             int i = random.nextInt(100)+1;
-            if(i<=25){
-                direction = "up";
+            if(i > 99 && !projectile.alive && shotAvailablCounter == 30){
+                projectile.set(worldX,worldY,direction,true);
+                for(int ii = 0; ii < gp.projectile.length;ii++){
+                    if(gp.projectile[ii] == null){
+                        gp.projectile[ii] = projectile;
+                        break;
+                    }
+                }
+                shotAvailablCounter = 0;
             }
-            if(i>25 && i<=50){
-                direction = "down";
+            if(shotAvailablCounter<30){
+                shotAvailablCounter++;
             }
-            if(i>50 && i<=75){
-                direction = "left";
+
+        }else{
+            actionLockCounter++;
+            if(actionLockCounter == 60){ // lock for 60 frames / 1s
+                //simplest AI
+                Random random = new Random();
+                int i = random.nextInt(100)+1;
+                if(i<=25){
+                    direction = "up";
+                }
+                if(i>25 && i<=50){
+                    direction = "down";
+                }
+                if(i>50 && i<=75){
+                    direction = "left";
+                }
+                if(i>75){
+                    direction = "right";
+                }
+                actionLockCounter = 0;
             }
-            if(i>75){
-                direction = "right";
+            Random random = new Random();
+            int i = random.nextInt(100)+1;
+            if(i > 99 && !projectile.alive && shotAvailablCounter == 30){
+                projectile.set(worldX,worldY,direction,true);
+                for(int ii = 0; ii < gp.projectile.length;ii++){
+                    if(gp.projectile[ii] == null){
+                        gp.projectile[ii] = projectile;
+                        break;
+                    }
+                }
+                shotAvailablCounter = 0;
             }
-            actionLockCounter = 0;
+            if(shotAvailablCounter<30){
+                shotAvailablCounter++;
+            }
         }
-        Random random = new Random();
-        int i = random.nextInt(100)+1;
-        if(i > 99 && !projectile.alive && shotAvailablCounter == 30){
-            projectile.set(worldX,worldY,direction,true);
-            gp.projectileList.add(projectile);
-            shotAvailablCounter = 0;
-        }
-        if(shotAvailablCounter<30){
-            shotAvailablCounter++;
-        }
+
     }
     public void draw(Graphics2D g2){
         BufferedImage image = null;

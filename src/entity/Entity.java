@@ -35,6 +35,7 @@ public class Entity {
     public int maxMana;
     public int manaRecoverCounter = 0;
     public int attack;
+    public int defaultspeed;
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
@@ -44,6 +45,7 @@ public class Entity {
     public int hpBarCounter = 0;
     public Projectile projectile;
     public int shotAvailablCounter = 0;
+    public int knockBackCounter = 0;
     public int useCost;
     public int numKey = 0;
     public int numFinalKey = 0;
@@ -62,6 +64,9 @@ public class Entity {
     public final int type_fireBall = 7;
     public boolean onPath = false;
     public boolean loseKey = false;
+    public boolean knockBack = false;
+    public Entity attacker;
+    public String knockBackDirection;
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;
@@ -155,7 +160,10 @@ public class Entity {
         collisionON = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this,false);
-
+        boolean contactPlayer = gp.cChecker.checkPlayer(this, false);
+        if(contactPlayer && type == type_monster){
+            damagePlayer(attack);
+        }
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
         gp.cChecker.checkEntity(this, gp.iTile);
@@ -195,10 +203,13 @@ public class Entity {
             }else{
                 //check monster collision with the updated worldX, worldY
                 int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
-                gp.player.damageMonster(monsterIndex,gp.player.axeDamage);
+                gp.player.damageMonster(monsterIndex,this,gp.player.axeDamage);
 
                 int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
                 gp.player.damageInteractiveTile(iTileIndex);
+
+                int projectileIndex = gp.cChecker.checkEntity(this,gp.projectile);
+                damageProjectile(projectileIndex);
             }
 
 
@@ -213,6 +224,14 @@ public class Entity {
             spriteCounter = 0;
             attacking = false;
         }
+    }
+    public void damageProjectile(int i){
+        if(i!=999){
+            Entity projectile = gp.projectile[i];
+            projectile.alive = false;
+            generateParticle(projectile,projectile);
+        }
+
     }
     public Color getParticleColor(){
         Color color = null;
@@ -250,8 +269,35 @@ public class Entity {
             gp.player.invincible = true;
         }
     }
+    public void knockBack(Entity target, Entity attacker){
+        this.attacker = attacker;
+        target.knockBackDirection = attacker.direction;
+        target.speed += 5;
+        target.knockBack = true;
+    }
     public void update(){
-        if(attacking){
+        if(knockBack){
+            checkCollistion();
+            if(collisionON){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultspeed;
+            }else if(!collisionON){
+                switch (knockBackDirection){
+                    case "down": worldY+=speed;break;
+                    case "up": worldY-= speed;break;
+                    case "left": worldX-=speed;break;
+                    case "right": worldX+=speed;break;
+                }
+            }
+            knockBackCounter++;
+            if(knockBackCounter==10){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultspeed;
+            }
+        }
+        else if(attacking){
             attacking();
         }else {
             setAction();
@@ -337,7 +383,7 @@ public class Entity {
                         if (spriteNum == 2) image = up2;
                     }
                     if(attacking){
-                        tempScreenY = screenY - gp.tileSize;
+                        tempScreenY = screenY - up1.getHeight();
                         if (spriteNum == 1) image = attackUp1;
                         if (spriteNum == 2) image = attackUp2;
                     }
@@ -359,7 +405,7 @@ public class Entity {
                         if(spriteNum == 2)image = left2;
                     }
                     if(attacking){
-                        tempScreenX = screenX - gp.tileSize;
+                        tempScreenX = screenX - left1.getWidth();
                         if(spriteNum == 1)image = attackLeft1;
                         if(spriteNum == 2)image = attackLeft2;
                     }

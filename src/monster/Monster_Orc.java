@@ -16,7 +16,8 @@ public class Monster_Orc extends Entity {
         type = 2;
         attack = 1;
         name = "Orc";
-        speed = 3;
+        defaultspeed = 3;
+        speed = defaultspeed;
         maxLife = 15;
         life = maxLife;
         solidArea = new Rectangle();
@@ -62,6 +63,7 @@ public class Monster_Orc extends Entity {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
             searchPath(goalCol, goalRow);
+
 
         } else {
             actionLockCounter++;

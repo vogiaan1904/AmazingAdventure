@@ -16,21 +16,21 @@ public class Monster_Skeleton extends Entity {
         type = 2;
         attack = 2;
         name = "Skeleton";
-        speed = 2;
+        defaultspeed = 2;
+        speed = defaultspeed;
         maxLife = 50;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 28;
-        solidArea.y = 56;
+        solidArea.y = 52;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
         solidArea.width = 40;
-        solidArea.height = 40;
+        solidArea.height = 44;
 
         attackArea.width=48;
         attackArea.height=48;
-        collision = false;
         getImage();
         getAttackImage();
     }
@@ -87,7 +87,7 @@ public class Monster_Skeleton extends Entity {
 
         //check if it attacks
         if(!attacking){
-            checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
+            checkAttackOrNot(30, gp.tileSize*6, gp.tileSize*3);
         }
     }
     public void damageReaction(){
