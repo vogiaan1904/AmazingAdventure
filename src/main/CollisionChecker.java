@@ -99,8 +99,7 @@ public class CollisionChecker {
                         if (qp.obj[i].name == "Chest") {
                             if (qp.player.numKey > 0) {
                                 qp.obj[i].down1 = qp.obj[i].down2;
-                                checkChest(i);
-
+                                qp.eSpawner.spawnObject(i);
                             }
                         } else if (qp.obj[i].name == "Door") {
                             qp.obj[i].down1 = qp.obj[i].down2;
@@ -205,27 +204,5 @@ public class CollisionChecker {
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
         return contactPlayer;
-    }
-    public void checkChest(int i){
-        if(i==0){
-            int lastIndex = qp.obj.length - 1;
-            qp.obj[lastIndex] = new Object_FinalKey(qp);
-            qp.obj[lastIndex].worldX = qp.tileSize*36;
-            qp.obj[lastIndex].worldY = qp.tileSize*8;
-        }
-
-        if(i==1){
-            int lastIndex = qp.obj.length - 1;
-            qp.obj[lastIndex] = new Object_Potion_Red(qp);
-            qp.obj[lastIndex].worldX = qp.tileSize*31;
-            qp.obj[lastIndex].worldY = qp.tileSize*37;
-        }
-
-        for (int j = 0; j < qp.player.inventory.size(); j++) {
-            if (qp.player.inventory.get(j).name == "Key") {
-                qp.player.inventory.remove(j);
-            }
-        }
-        qp.player.numKey--;
     }
 }

@@ -12,10 +12,6 @@ import java.util.Random;
 
 public class AssetSetter {
     GamePanel gp;
-    public boolean chest1Opened = false;
-    public boolean chest2Opened = false;
-    public int chest1 = 0;
-    public int chest2 = 1;
 
     public AssetSetter(GamePanel gp){
         this.gp = gp;
