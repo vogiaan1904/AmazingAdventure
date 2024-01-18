@@ -98,7 +98,7 @@ public class UI {
     }
 
     public void drawTitleScreen(){
-        g2.setColor(new Color(0, 204, 102));
+        g2.setColor(new Color(143, 143, 84));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         g2.setColor(new Color(168, 153, 132));
