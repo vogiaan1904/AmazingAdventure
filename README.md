@@ -24,4 +24,4 @@
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/amazing-adventure.git
+   git clone https://github.com/vogiaan1904/AmazingAdventure.git
